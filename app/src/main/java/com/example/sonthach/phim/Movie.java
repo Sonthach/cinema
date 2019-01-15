@@ -1,16 +1,37 @@
 package com.example.sonthach.phim;
 
-public class Movie {
-    private String name;
-    private String genre;
-    private String releaseDate;
-    private String content;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
-    public Movie(String name, String genre, String releaseDate, String content) {
+import java.util.List;
+
+public class Movie {
+    @SerializedName("name")
+    @Expose
+    private String name;
+
+    @SerializedName("genre")
+    @Expose
+    private String genre;
+
+    @SerializedName("releaseDate")
+    @Expose
+    private String releaseDate;
+
+    @SerializedName("posterURL")
+    @Expose
+    private String posterURL;
+
+    public Movie(String name, String genre, String releaseDate, String posterURL) {
         this.name = name;
         this.genre = genre;
         this.releaseDate = releaseDate;
-        this.content = content;
+        this.posterURL = posterURL;
+    }
+
+    private List<Movie> movies;
+
+    public Movie() {
     }
 
     public String getName() {
@@ -37,11 +58,11 @@ public class Movie {
         this.releaseDate = releaseDate;
     }
 
-    public String getContent() {
-        return content;
+    public String getPosterURL() {
+        return posterURL;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setPosterURL(String posterURL) {
+        this.posterURL = posterURL;
     }
 }

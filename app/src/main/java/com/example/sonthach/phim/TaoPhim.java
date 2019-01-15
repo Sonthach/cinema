@@ -9,12 +9,15 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -26,8 +29,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -44,6 +50,7 @@ import retrofit2.Callback;
 
 public class TaoPhim extends AppCompatActivity {
     String IMAGE_PATH ="";
+    private Uri imageToUploadUri;
     File file;
     private static final int MY_CAMERA_REQUEST_CODE = 100;
     Spinner spin;
@@ -107,7 +114,6 @@ public class TaoPhim extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Request();
-
             }
         });
 
@@ -215,6 +221,37 @@ public class TaoPhim extends AppCompatActivity {
         startActivityForResult(intent,REQUEST_CHOOSE_PHOTO);
     }
 
+    public String saveImage(Bitmap myBitmap, int requestCode) {
+        if (requestCode == REQUEST_TAKE_PHOTO) {
+            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+            myBitmap.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
+            File wallpaperDirectory = new File(
+                    Environment.getExternalStorageDirectory() + "/image");
+            // have the object build the directory structure, if needed.
+            if (!wallpaperDirectory.exists()) {
+                wallpaperDirectory.mkdirs();
+            }
+
+            try {
+                File f = new File(wallpaperDirectory, Calendar.getInstance()
+                        .getTimeInMillis() + ".jpg");
+                f.createNewFile();
+                FileOutputStream fo = new FileOutputStream(f);
+                fo.write(bytes.toByteArray());
+                MediaScannerConnection.scanFile(this,
+                        new String[]{f.getPath()},
+                        new String[]{"image/jpeg"}, null);
+                fo.close();
+                Log.d("TAG", "File Saved::--->" + f.getAbsolutePath());
+                //mImageFile = f;
+                return f.getAbsolutePath();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+        }
+        return "";
+    }
+
 
 
     @Override
@@ -233,9 +270,10 @@ public class TaoPhim extends AppCompatActivity {
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
-            }else if(requestCode ==REQUEST_TAKE_PHOTO){
+            }else if(requestCode == REQUEST_TAKE_PHOTO) {
                     Bitmap bitmap = (Bitmap) data.getExtras().get("data");
                     poster.setImageBitmap(bitmap);
+                    IMAGE_PATH = saveImage(bitmap,REQUEST_TAKE_PHOTO);
             }
         }
     }

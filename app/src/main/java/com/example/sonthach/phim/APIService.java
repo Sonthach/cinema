@@ -1,5 +1,6 @@
 package com.example.sonthach.phim;
 
+import java.util.List;
 import java.util.Map;
 
 import okhttp3.MultipartBody;
@@ -12,6 +13,7 @@ import retrofit2.http.Part;
 import retrofit2.http.PartMap;
 import retrofit2.Call;
 
+
 public interface APIService {
     @Multipart
     @POST ("/api/cinema/")
@@ -19,6 +21,9 @@ public interface APIService {
             @PartMap() Map<String, RequestBody> partMap,
             @Part MultipartBody.Part photo
             );
+
+    @GET("api/cinema/")
+    Call<List<Movie>> getAllMovie();
 
 
 }
