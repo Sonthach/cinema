@@ -1,17 +1,18 @@
 package com.example.sonthach.phim;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -23,21 +24,31 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
 
-import okhttp3.Call;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-import okhttp3.Response;
 import okhttp3.ResponseBody;
-import retrofit.GsonConverterFactory;
-import retrofit2.Retrofit;
+import retrofit2.Callback;
 
 public class TaoPhim extends AppCompatActivity {
+    String IMAGE_PATH ="";
+    File file;
+    private static final int MY_CAMERA_REQUEST_CODE = 100;
     Spinner spin;
+    private APIService apiService;
+    Context context;
     String Arr[] = {"Hành động","Hài hước","Hoạt hình"};
     int spPosition = 0;
     TextView Ngayphathanh;
@@ -64,8 +75,6 @@ public class TaoPhim extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        APIService apiService = APIUtils.getAPIService();
-
 
         setContentView(R.layout.activity_tao_phim);
         Ngayphathanh = findViewById(R.id.edtNgayPhatHanh2);
@@ -97,15 +106,40 @@ public class TaoPhim extends AppCompatActivity {
         TaoPhim.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Request();
 
             }
         });
+
+
 
     }
 
     private void update(TextView ngayphathanh) {
         Ngayphathanh.setText(stf.format(calendar.getTime()));
     }
+
+    @Override
+
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == MY_CAMERA_REQUEST_CODE) {
+
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                Toast.makeText(this, "camera permission granted", Toast.LENGTH_LONG).show();
+
+            } else {
+
+                Toast.makeText(this, "camera permission denied", Toast.LENGTH_LONG).show();
+
+            }
+
+        };
+    }
+
 
     private void CreateSpin() {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,Arr);
@@ -144,17 +178,44 @@ public class TaoPhim extends AppCompatActivity {
         });
         pictureDialog.show();
     }
+    private void Permision(){
+        if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED ) {
+        requestPermissions(new String[]{Manifest.permission.CAMERA},
+                MY_CAMERA_REQUEST_CODE);
 
+        }
+        if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    MY_CAMERA_REQUEST_CODE);
+
+        }
+
+        if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                    MY_CAMERA_REQUEST_CODE);
+
+        }
+
+        if (checkSelfPermission(Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.INTERNET},
+                    MY_CAMERA_REQUEST_CODE);
+
+        }
+    }
     private void takepicture(){
+        Permision();
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(intent,REQUEST_TAKE_PHOTO);
     }
 
     private void choosePhoto(){
+        Permision();
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType("image/*");
         startActivityForResult(intent,REQUEST_CHOOSE_PHOTO);
     }
+
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -163,9 +224,12 @@ public class TaoPhim extends AppCompatActivity {
 
                 try {
                     Uri imageUri = data.getData();
+                    IMAGE_PATH = ReadPathUtils.getPath(TaoPhim.this, data.getData());
+                    Uri uri = Uri.fromFile(new File(IMAGE_PATH));
                     InputStream is = getContentResolver().openInputStream(imageUri);
                     Bitmap bitmap = BitmapFactory.decodeStream(is);
                     poster.setImageBitmap(bitmap);
+                    Toast.makeText(this, IMAGE_PATH, Toast.LENGTH_LONG).show();
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
@@ -177,10 +241,50 @@ public class TaoPhim extends AppCompatActivity {
     }
 
     private void Request(){
-        String mName = Tenphim.getText().toString().trim();
-        String mMota = Mota.getText().toString().trim();
-        String mNgayphathanh = Ngayphathanh.getText().toString().trim();
-        String Theloai = spin.getSelectedItem().toString();
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        String releaseDate ="";
+
+        try {
+            Date date = df.parse(Ngayphathanh.getText().toString());
+            releaseDate = String.valueOf(date.getTime());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        File file = new File(IMAGE_PATH);
+        RequestBody mName = RequestBody.create(MediaType.parse("text/plain"),Tenphim.getText().toString().trim());
+        RequestBody mMota = RequestBody.create(MediaType.parse("text/plain"),Mota.getText().toString().trim());
+        RequestBody mNgayphathanh = RequestBody.create(MediaType.parse("text/plain"),releaseDate);
+        RequestBody mTheloai = RequestBody.create(MediaType.parse("text/plain"),spin.getSelectedItem().toString());
+        RequestBody requestFile = RequestBody.create(MediaType.parse("image/*"), file);
+        MultipartBody.Part body =
+                MultipartBody.Part.createFormData("file", file.getName(), requestFile);
+
+
+        HashMap<String, RequestBody> map = new HashMap<>();
+        map.put("name",mName);
+        map.put("genre",mTheloai);
+        map.put("releaseDate",mNgayphathanh);
+        map.put("content",mMota);
+
+        apiService = APIUtils.getAPIService();
+        apiService.PostFilm(map,body).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(retrofit2.Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
+                if(response.isSuccessful())
+                {
+                    ThongBao.Toast(TaoPhim.this,"Thanh cong!");
+                }else {
+                    ThongBao.Toast(TaoPhim.this,"Có lỗi xảy ra! Vui lòng thử lại.");
+                }
+            }
+
+            @Override
+            public void onFailure(retrofit2.Call<ResponseBody> call, Throwable t) {
+                ThongBao.Toast(TaoPhim.this,t.getMessage());
+            }
+        });
+
 
     }
 

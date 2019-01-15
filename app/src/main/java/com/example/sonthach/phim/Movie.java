@@ -5,14 +5,12 @@ public class Movie {
     private String genre;
     private String releaseDate;
     private String content;
-    private String creatorId;
 
-    public Movie(String name, String genre, String releaseDate, String content, String creatorId) {
+    public Movie(String name, String genre, String releaseDate, String content) {
         this.name = name;
         this.genre = genre;
         this.releaseDate = releaseDate;
         this.content = content;
-        this.creatorId = creatorId;
     }
 
     public String getName() {
@@ -45,13 +43,5 @@ public class Movie {
 
     public void setContent(String content) {
         this.content = content;
-    }
-
-    public String getCreatorId() {
-        return creatorId;
-    }
-
-    public void setCreatorId(String creatorId) {
-        this.creatorId = creatorId;
     }
 }
