@@ -9,69 +9,71 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
-import android.widget.LinearLayout;
+import android.widget.Adapter;
 import android.widget.ListView;
+
+import com.example.sonthach.phim.Load.Filmss;
+import com.example.sonthach.phim.model.request.Movie;
+import com.example.sonthach.phim.model.response.Films;
+import com.example.sonthach.phim.model.ResponseMovie;
+
+import java.util.ArrayList;
+import java.util.DuplicateFormatFlagsException;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class DanhsachphimAcitivity extends AppCompatActivity {
     FloatingActionButton fab;
     private RecyclerView recyclerView;
-    private List<Movie> MoviesList = new ArrayList<>();
+    private RecyclerView.LayoutManager layoutManager;
+    private List<com.example.sonthach.phim.Load.Movie> movies = new ArrayList<>();
     private RecyclerAdapter adapter;
+    private String TAG = MainActivity.class.getSimpleName();
     private APIService apiService;
-    ListView listView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_danhsachphim);
-
-
-        Per();
+        per();
 
 
         fab = findViewById(R.id.fttaophim);
-
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(DanhsachphimAcitivity.this);
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
 
         apiService = APIUtils.getAPIService();
-        apiService.getAllMovie().enqueue(new Callback<List<Movie>>() {
+        Call<Filmss> call;
+        apiService.getAllMovie().enqueue(new Callback<Filmss>() {
             @Override
-            public void onResponse(Call<List<Movie>> call, Response<List<Movie>> response) {
-                if(response.isSuccessful()) {
-                    MoviesList = response.body();
+            public void onResponse(Call<Filmss> call, Response<Filmss> response) {
+                if (!movies.isEmpty()) {
+                    movies.clear();
                 }
+
+                movies = response.body().getMovie();
+                adapter = new RecyclerAdapter(movies, DanhsachphimAcitivity.this);
+                recyclerView.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
             }
 
             @Override
-            public void onFailure(Call<List<Movie>> call, Throwable t) {
-                ThongBao.Toast(DanhsachphimAcitivity.this,"Không thể Load Data!");
-            }
-        });
-        recyclerView = findViewById(R.id.recyclerview);
-        recyclerView.setHasFixedSize(true);
-        RecyclerAdapter adapter = new RecyclerAdapter(MoviesList, DanhsachphimAcitivity.this);
-        recyclerView.setAdapter(adapter);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
+            public void onFailure(Call<Filmss> call, Throwable t) {
 
-
-
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(DanhsachphimAcitivity.this,TaoPhim.class));
             }
         });
     }
-    private void Per(){
+
+
+    private void per() {
         if (checkSelfPermission(Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{Manifest.permission.INTERNET},
                     1);
@@ -84,5 +86,5 @@ public class DanhsachphimAcitivity extends AppCompatActivity {
 
         }
     }
-
 }
+

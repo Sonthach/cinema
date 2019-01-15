@@ -1,6 +1,8 @@
 package com.example.sonthach.phim;
 
-import java.util.List;
+import com.example.sonthach.phim.Load.Filmss;
+import com.example.sonthach.phim.model.response.Films;
+
 import java.util.Map;
 
 import okhttp3.MultipartBody;
@@ -17,13 +19,13 @@ import retrofit2.Call;
 public interface APIService {
     @Multipart
     @POST ("/api/cinema/")
-    Call<ResponseBody> PostFilm(
+    Call<ResponseBody> postFilm(
             @PartMap() Map<String, RequestBody> partMap,
             @Part MultipartBody.Part photo
             );
 
     @GET("api/cinema/")
-    Call<List<Movie>> getAllMovie();
+    Call<Filmss> getAllMovie();
 
 
 }

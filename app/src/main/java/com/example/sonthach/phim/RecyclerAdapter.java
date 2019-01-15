@@ -8,18 +8,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
+import com.example.sonthach.phim.model.ResponseMovie;
+import com.example.sonthach.phim.Load.Movie;
 
 import java.util.List;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyViewHolder> {
-    private List<Movie> Movie;
-    private Context context;
+    private List<Movie> movies;
+    Context context;
 
-    public RecyclerAdapter(List<com.example.sonthach.phim.Movie> movie, Context context) {
-        Movie = movie;
+    public RecyclerAdapter(List<Movie> movie,Context context) {
+        movies = movie;
         this.context = context;
     }
 
@@ -30,18 +30,18 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int i) {
-        holder.txtTenphim.setText(Movie.get(i).getName());
-        holder.txtTheloai.setText(Movie.get(i).getGenre());
-        holder.txtNgayphathanh.setText(Movie.get(i).getReleaseDate());
-        Glide.with(context).load(Movie.get(i).getPosterURL()).into(holder.poster);
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int pos) {
+
+        MyViewHolder holders = holder;
+        Movie movie = movies.get(pos);
+        holder.txtTenphim.setText("Tên phim: "+movie.getName());
+        holder.txtTheloai.setText("Thể loại: "+movie.getGenre());
+        holder.txtNgayphathanh.setText((CharSequence) "Ngày phát hành: "+movie.getReleaseDate());
+        Glide.with(context).load(movie.getPosterURL()).into(holder.poster);
     }
-
-
-
     @Override
     public int getItemCount() {
-        return Movie.size();
+        return movies.size();
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
@@ -54,13 +54,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             txtTenphim = itemView.findViewById(R.id.txttenphim);
             txtTheloai = itemView.findViewById(R.id.txttheloai);
             txtNgayphathanh = itemView.findViewById(R.id.txtngayphathanh);
-
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                }
-            });
 
         }
     }

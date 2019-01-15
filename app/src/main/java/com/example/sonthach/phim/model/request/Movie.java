@@ -1,9 +1,7 @@
-package com.example.sonthach.phim;
+package com.example.sonthach.phim.model.request;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-
-import java.util.List;
 
 public class Movie {
     @SerializedName("name")
@@ -27,11 +25,6 @@ public class Movie {
         this.genre = genre;
         this.releaseDate = releaseDate;
         this.posterURL = posterURL;
-    }
-
-    private List<Movie> movies;
-
-    public Movie() {
     }
 
     public String getName() {

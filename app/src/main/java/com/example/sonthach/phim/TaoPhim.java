@@ -306,7 +306,7 @@ public class TaoPhim extends AppCompatActivity {
         map.put("content",mMota);
 
         apiService = APIUtils.getAPIService();
-        apiService.PostFilm(map,body).enqueue(new Callback<ResponseBody>() {
+        apiService.postFilm(map,body).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(retrofit2.Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
                 if(response.isSuccessful())
