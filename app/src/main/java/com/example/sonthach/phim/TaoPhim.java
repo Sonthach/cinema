@@ -311,7 +311,8 @@ public class TaoPhim extends AppCompatActivity {
             public void onResponse(retrofit2.Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
                 if(response.isSuccessful())
                 {
-                    ThongBao.Toast(TaoPhim.this,"Thanh cong!");
+                    ThongBao.Toast(TaoPhim.this,"Đăng phim thành công!");
+                    finish();
                 }else {
                     ThongBao.Toast(TaoPhim.this,"Có lỗi xảy ra! Vui lòng thử lại.");
                 }
@@ -322,8 +323,6 @@ public class TaoPhim extends AppCompatActivity {
                 ThongBao.Toast(TaoPhim.this,t.getMessage());
             }
         });
-
-
     }
 
 }

@@ -9,16 +9,25 @@ import retrofit2.Retrofit;
 
 public class RetrofitClient {
     private static Retrofit retrofit = null;
+    private static  RetrofitClient mInstance;
     public static Retrofit getClient(String baseUrl){
-        Gson gson;
-        gson = new GsonBuilder().setLenient().create();
-
         if(retrofit == null) {
             retrofit = new Retrofit.Builder()
                     .baseUrl(baseUrl)
-                    .addConverterFactory(GsonConverterFactory.create(gson))
+                    .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }
         return retrofit;
+    }
+
+
+    public static  synchronized RetrofitClient getInstance(){
+        if(mInstance == null){
+            mInstance = new RetrofitClient();
+        }
+        return mInstance;
+    }
+    public APIService getApi(){ //API is APIServices interface
+        return retrofit.create(APIService.class);
     }
 }

@@ -17,13 +17,13 @@ public class Movie {
 
     @SerializedName("releaseDate")
     @Expose
-    private String releaseDate;
+    private long releaseDate;
 
     @SerializedName("posterURL")
     @Expose
     private String posterURL;
 
-    public Movie(String name, String genre, String releaseDate, String posterURL) {
+    public Movie(String name, String genre, long releaseDate, String posterURL) {
         this.name = name;
         this.genre = genre;
         this.releaseDate = releaseDate;
@@ -46,11 +46,11 @@ public class Movie {
         this.genre = genre;
     }
 
-    public String getReleaseDate() {
+    public long getReleaseDate() {
         return releaseDate;
     }
 
-    public void setReleaseDate(String releaseDate) {
+    public void setReleaseDate(long releaseDate) {
         this.releaseDate = releaseDate;
     }
 
