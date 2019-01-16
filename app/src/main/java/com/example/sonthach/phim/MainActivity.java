@@ -47,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
         String mEmail = edtEmail.getText().toString();
         String mPassword = edtPassword.getText().toString();
 
+
+
         apiService = APIUtils.getAPIService();
         apiService.userLogin(mEmail,mPassword).enqueue(new Callback<LoginRespone>() {
             @Override
@@ -59,13 +61,13 @@ public class MainActivity extends AppCompatActivity {
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                 }else {
-                    ThongBao.Toast(MainActivity.this,"Đăng nhập thất bại!!");
+                    ThongBao.Toast(MainActivity.this,"Sai Email hoặc Mật khẩu");
                 }
             }
 
             @Override
             public void onFailure(Call<LoginRespone> call, Throwable t) {
-                ThongBao.Toast(MainActivity.this,"Đăng nhập thất bại!!");
+                ThongBao.Toast(MainActivity.this,t.getMessage());
             }
         });
 

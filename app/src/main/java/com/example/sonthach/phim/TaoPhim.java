@@ -298,7 +298,15 @@ public class TaoPhim extends AppCompatActivity {
         MultipartBody.Part body =
                 MultipartBody.Part.createFormData("file", file.getName(), requestFile);
 
-
+        if(Tenphim.getText().toString().length() == 0){
+            ThongBao.Toast(TaoPhim.this,"Vui lòng nhập Tên phim!");
+        }
+        if(Mota.getText().toString().length() == 0){
+            ThongBao.Toast(TaoPhim.this,"Vui lòng nhập Mô tả phim!");
+        }
+        if(Ngayphathanh.getText().toString().length() == 0){
+            ThongBao.Toast(TaoPhim.this,"Vui lòng chọn Ngày phát hành phim!");
+        }
         HashMap<String, RequestBody> map = new HashMap<>();
         map.put("name",mName);
         map.put("genre",mTheloai);

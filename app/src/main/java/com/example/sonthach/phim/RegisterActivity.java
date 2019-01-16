@@ -42,7 +42,7 @@ public class RegisterActivity extends AppCompatActivity {
         checkconnection();
         edtName = findViewById(R.id.txtregname);
         edtEmail = findViewById(R.id.txtregemail);
-        edtPassword = findViewById(R.id.txtregemail);
+        edtPassword = findViewById(R.id.txtregpassword);
         edtConfirm = findViewById(R.id.txtcomfirmpassword);
 
         Register = findViewById(R.id.buttonregister);
@@ -55,6 +55,21 @@ public class RegisterActivity extends AppCompatActivity {
                 String mEmail = edtEmail.getText().toString().trim();
                 String mPassword = edtPassword.getText().toString().trim();
 
+                if(mName.length() == 0)
+                {
+                    ThongBao.Toast(RegisterActivity.this,"Vui lòng nhập Tên");
+                }
+
+                if(mEmail.length() == 0)
+                {
+                    ThongBao.Toast(RegisterActivity.this,"Vui lòng nhập Email");
+                }
+
+                if(mPassword.length() == 0)
+                {
+                    ThongBao.Toast(RegisterActivity.this,"Vui lòng nhập Mật khẩu");
+                }
+
                 Call<ResponseBody> call = RetrofitClient
                         .getInstance()
                         .getApi()
@@ -62,12 +77,9 @@ public class RegisterActivity extends AppCompatActivity {
                 call.enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                        try
+                        if(response.isSuccessful())
                         {
-                            String s = response.body().string();
-                            ThongBao.Toast(RegisterActivity.this,s);
-                        }catch (IOException e){
-                            e.printStackTrace();
+                            ThongBao.Toast(RegisterActivity.this,"Đăng ký thành công!");
                         }
                     }
 
