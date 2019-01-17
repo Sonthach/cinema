@@ -13,6 +13,7 @@
         app:title="Chi tiết Phim"
         android:background="#FFF">
     </android.support.v7.widget.Toolbar>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -23,17 +24,20 @@
             >
             <ImageView
                 android:id="@+id/poster_chitiet"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
+                android:layout_width="100dp"
+                android:layout_height="190dp"
                 android:src="@drawable/filmnon"
                 android:foregroundGravity="center"
                 android:layout_gravity="center"
+                android:scaleType="fitXY"
                 />
         </LinearLayout>
-
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
             <TextView
                 android:layout_width="wrap_content"
@@ -60,10 +64,19 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="Người tạo: "
+                android:id="@+id/chitiet_nguoitao"
+                android:textSize="25dp"
+                android:layout_margin="10dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="Mô tả: "
                 android:id="@+id/chitiet_mota"
                 android:textSize="25dp"
                 android:layout_margin="10dp"/>
 
         </LinearLayout>
+        </ScrollView>
 </LinearLayout>

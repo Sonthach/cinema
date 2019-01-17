@@ -54,7 +54,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         MyViewHolder holders = holder;
         Movie movie = moviesSearch.get(pos);
         holder.txtTenphim.setText(movie.getName());
-        holder.txtTheloai.setText(movie.getGenre());
+        holder.txtTheloai.setText(movie.getGenre()+"     -");
 
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         String dateString = formatter.format(new Date(movie.getReleaseDate()));
@@ -85,7 +85,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                     Intent intent = new Intent(context,ProductDetails.class);
                     intent.putExtra("thongtinphim", (Serializable) moviesSearch.get(getPosition()));
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    ThongBao.Toast(context,moviesSearch.get(getPosition()).getName());
+                    //ThongBao.Toast(context,moviesSearch.get(getPosition()).getName());
                     context.startActivity(intent);
                 }
             });

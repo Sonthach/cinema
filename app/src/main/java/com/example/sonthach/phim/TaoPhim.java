@@ -59,7 +59,7 @@ public class TaoPhim extends AppCompatActivity {
     Spinner spin;
     private APIService apiService;
     Context context;
-    String Arr[] = {"Hành động","Hài hước","Hoạt hình"};
+    String Arr[] = {"Hành động","Hài hước","Hoạt hình","Kinh dị","Tình cảm"};
     int spPosition = 0;
     TextView Ngayphathanh;
     Button ChupHinh,TaoPhim;

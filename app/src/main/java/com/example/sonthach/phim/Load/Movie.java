@@ -29,11 +29,23 @@ public class Movie implements Serializable {
     @Expose
     private String content;
 
+    @SerializedName("creatorId")
+    @Expose
+    private String creatorId;
+
     public Movie(String name, String genre, long releaseDate, String posterURL) {
         this.name = name;
         this.genre = genre;
         this.releaseDate = releaseDate;
         this.posterURL = posterURL;
+    }
+
+    public String getCreatorId() {
+        return creatorId;
+    }
+
+    public void setCreatorId(String creatorId) {
+        this.creatorId = creatorId;
     }
 
     public String getContent() {

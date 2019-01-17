@@ -1,36 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:card_view="http://schemas.android.com/tools"
-    android:layout_marginLeft="10dp"
-    android:layout_marginRight="10dp"
-    android:layout_marginTop="7dp"
-    android:layout_marginBottom="7dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="7dp"
+        app:cardElevation="@dimen/cardview_default_elevation"
+        app:cardCornerRadius="10dp">
 
-    app:cardElevation="@dimen/cardview_default_elevation"
-    app:cardCornerRadius="10dp"
-
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
-                <ImageView
-                    android:layout_width="130dp"
-                    android:layout_height="130dp"
-                    android:layout_margin="10dp"
-                    android:id="@+id/ctposter"
-                    android:src="@drawable/filmnon"/>
+        <ImageView
+            android:id="@+id/ctposter"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginLeft="110dp"
+            android:layout_marginTop="10dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/filmnon" />
 
                 <TextView
                     android:id="@+id/txttenphim"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="1"
-                    android:textSize="25dp"
-                    android:maxLines="4"
+                    android:textSize="20dp"
+                    android:maxLines="2"
                     android:ellipsize="end"
+                    android:textColor="#FF008577"
+                    android:textStyle="bold"
                     android:layout_below="@id/ctposter"
-                    android:layout_marginLeft="150dp"
-                    android:layout_marginTop="2dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="160dp"
                     />
 
                 <TextView
@@ -39,12 +46,15 @@
                     android:layout_height="wrap_content"
                     android:text="1"
                     android:layout_toRightOf="@id/ctposter"
-                    android:layout_marginLeft="150dp"
+                    android:layout_marginLeft="10dp"
                     android:layout_below="@id/txttenphim"
+                    android:textColor="#000"
                     android:textSize="20dp"
                     android:paddingTop="20dp"
-                    android:layout_marginTop="50dp"
+                    android:layout_marginTop="180dp"
                     />
+
+
 
 
                 <TextView
@@ -54,9 +64,11 @@
                     android:text="1"
                     android:layout_toRightOf="@id/ctposter"
                     android:layout_marginLeft="150dp"
+                    android:textColor="#000"
                     android:paddingTop="60dp"
                     android:layout_below="@id/txttheloai"
                     android:textSize="20dp"
-                    android:layout_marginTop="50dp"
+                    android:layout_marginTop="140dp"
                     />
-</android.support.v7.widget.CardView>
+    </android.support.v7.widget.CardView>
+</LinearLayout>
