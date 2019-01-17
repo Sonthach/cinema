@@ -13,37 +13,46 @@
         android:layout_gravity="center"
         android:textSize="30dp"
         android:textStyle="bold"
-        android:textColor="#000"
+        android:textColor="#FF008577"
         android:layout_marginTop="70dp"/>
     <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="50dp"
+        android:textColorHint="#FF008577"
+        android:layout_marginLeft="45dp"
+        android:background="@drawable/edittext_background"
         >
 
 
         <EditText
             android:id="@+id/txtloginemail"
-            android:layout_width="300dp"
+            android:layout_width="250dp"
             android:layout_marginLeft="35dp"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
             android:hint="Email"
+            android:layout_marginTop="0dp"
+
             />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        app:passwordToggleEnabled="true">
+        app:passwordToggleEnabled="true"
+        android:textColorHint="#FF008577"
+        android:layout_marginLeft="45dp"
+        android:background="@drawable/edittext_background">
         <EditText
             android:id="@+id/txtloginpassword"
-            android:layout_width="300dp"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
-            android:layout_marginLeft="35dp"
+            android:layout_marginLeft="45dp"
             android:hint="Mật khẩu"
+
             />
     </android.support.design.widget.TextInputLayout>
     <ProgressBar
@@ -54,21 +63,23 @@
         android:visibility="gone"/>
     <Button
         android:id="@+id/buttonlogin"
-        android:layout_width="300dp"
-        android:layout_marginLeft="35dp"
-        android:layout_height="wrap_content"
+        android:layout_width="290dp"
+        android:layout_marginLeft="55dp"
+        android:layout_height="50dp"
         android:layout_marginTop="30dp"
         android:text="ĐĂNG NHẬP"
+        android:textColor="#FFF"
         android:backgroundTint="@color/colorPrimaryDark"
-        android:background="@color/colorPrimaryDark"/>
+        android:background="@drawable/button_background"/>
     <Button
         android:id="@+id/buttonreg"
-        android:layout_width="300dp"
-        android:layout_marginLeft="35dp"
-        android:layout_height="wrap_content"
+        android:layout_width="290dp"
+        android:layout_marginLeft="55dp"
+        android:layout_height="50dp"
         android:layout_marginTop="30dp"
         android:text="ĐĂNG KÝ"
+        android:textColor="#FFF"
         android:backgroundTint="@color/colorPrimaryDark"
-        android:background="@color/colorPrimaryDark"/>
+        android:background="@drawable/button_background"/>
 
 </LinearLayout>

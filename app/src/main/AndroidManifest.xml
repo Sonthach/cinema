@@ -14,9 +14,8 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
-
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/logoapp"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -30,7 +29,8 @@
         </activity>
         <activity android:name=".DanhsachphimAcitivity" />
         <activity android:name=".TaoPhim" />
-        <activity android:name=".RegisterActivity"/>
+        <activity android:name=".RegisterActivity" />
+        <activity android:name=".ProductDetails"></activity>
     </application>
 
 </manifest>

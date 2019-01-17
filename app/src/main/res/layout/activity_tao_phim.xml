@@ -5,8 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".TaoPhim"
-    android:padding="10dp"
     android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:id="@+id/tbtaophim"
+        app:title="Tạo Phim"
+        android:background="#FFF">
+    </android.support.v7.widget.Toolbar>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -26,14 +33,17 @@
                 android:layout_height="150dp"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:src="@drawable/ic_launcher_background" />
+                android:src="@drawable/filmnon"
+                android:layout_marginTop="30dp"/>
 
             <Button
                 android:id="@+id/btnChonAnh2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
                 android:layout_gravity="center"
-                android:text="Chọn ảnh" />
+                android:text="Chọn ảnh"
+                android:textColor="#fff"
+                android:background="@drawable/button_background"/>
 
         </LinearLayout>
 
@@ -41,13 +51,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_margin="10dp"
+                android:textColorHint="#FF008577"
+                android:background="@drawable/edittext_background">
             <EditText
                 android:id="@+id/edtTenPhim"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:hint="Nhập tên phim" />
+                android:hint="Nhập tên phim"
+              />
+            </android.support.design.widget.TextInputLayout>
+
         </LinearLayout>
 
         <LinearLayout
@@ -60,6 +79,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
+                android:layout_margin="5dp"
                 ></Spinner>
         </LinearLayout>
 
@@ -67,23 +87,46 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textColorHint="#FF008577"
+                android:layout_margin="10dp"
+                android:background="@drawable/edittext_background">
             <TextView
                 android:id="@+id/edtNgayPhatHanh2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:hint="Ngày phát hành" />
+                android:hint="Ngày phát hành"
+                android:textSize="20dp"
+                />
 
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginTop="20dp"
+                android:textColorHint="#FF008577"
+                android:layout_margin="10dp"
+                android:background="@drawable/edittext_background">
             <EditText
                 android:id="@+id/edtMoTa"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:hint="Mô tả" />
+                android:hint="Mô tả"
+                android:inputType="text|textMultiLine"
+                />
+            </android.support.design.widget.TextInputLayout>
 
         </LinearLayout>
-
+        <ProgressBar
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/progress_bar_taophim"
+            android:layout_gravity="center"
+            android:visibility="gone"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -92,10 +135,12 @@
             <Button
                 android:id="@+id/btnTaoPhim"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
-                android:text="Tạo phim" />
+                android:text="Tạo phim"
+                android:textColor="#fff"
+                android:background="@drawable/button_background"/>
         </LinearLayout>
         </LinearLayout>
     </ScrollView>

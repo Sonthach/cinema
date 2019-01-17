@@ -1,28 +1,30 @@
 package com.example.sonthach.phim.Load;
 
 public class User {
-    private String id;
+    private String _id;
     private String email;
     private String name;
     private String password;
     private String userlink;
     private int __v;
 
-    public User(String id, String email, String name, String password, String userlink, int __v) {
-        this.id = id;
+    public User(String id, String email, String name, String userlink) {
+        this._id = id;
         this.email = email;
         this.name = name;
-        this.password = password;
         this.userlink = userlink;
-        this.__v = __v;
+    }
+
+    public User(String id){
+        this._id = id;
     }
 
     public String getId() {
-        return id;
+        return _id;
     }
 
     public void setId(String id) {
-        this.id = id;
+        this._id = id;
     }
 
     public String getEmail() {

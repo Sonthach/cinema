@@ -25,9 +25,11 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.support.v7.widget.Toolbar;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -50,6 +52,7 @@ import retrofit2.Callback;
 
 public class TaoPhim extends AppCompatActivity {
     String IMAGE_PATH ="";
+    Toolbar toolbar;
     private Uri imageToUploadUri;
     File file;
     private static final int MY_CAMERA_REQUEST_CODE = 100;
@@ -62,6 +65,7 @@ public class TaoPhim extends AppCompatActivity {
     Button ChupHinh,TaoPhim;
     EditText Tenphim,Mota;
     ImageView poster;
+    ProgressBar processBuilder;
     String Format = "dd/MM/yyyy";
     SimpleDateFormat stf = new SimpleDateFormat(Format);
     final int REQUEST_TAKE_PHOTO = 123;
@@ -84,6 +88,8 @@ public class TaoPhim extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_tao_phim);
+
+        toolbar = findViewById(R.id.tbtaophim);
         Ngayphathanh = findViewById(R.id.edtNgayPhatHanh2);
         Tenphim = findViewById(R.id.edtTenPhim);
         Mota = findViewById(R.id.edtMoTa);
@@ -91,7 +97,14 @@ public class TaoPhim extends AppCompatActivity {
         spin = findViewById(R.id.spinnerOption);
         poster = findViewById(R.id.imgposter2);
         ChupHinh = findViewById(R.id.btnChonAnh2);
+        processBuilder = findViewById(R.id.progress_bar_taophim);
+
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        String defaultDate = df.format(Calendar.getInstance().getTime());
+        Ngayphathanh.setText(defaultDate);
+
         CreateSpin();
+        actionBar();
 
         ChupHinh.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,9 +129,17 @@ public class TaoPhim extends AppCompatActivity {
                 Request();
             }
         });
+    }
 
-
-
+    private void actionBar() {
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
     private void update(TextView ngayphathanh) {
@@ -222,6 +243,7 @@ public class TaoPhim extends AppCompatActivity {
     }
 
     public String saveImage(Bitmap myBitmap, int requestCode) {
+        Permision();
         if (requestCode == REQUEST_TAKE_PHOTO) {
             ByteArrayOutputStream bytes = new ByteArrayOutputStream();
             myBitmap.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
@@ -307,11 +329,14 @@ public class TaoPhim extends AppCompatActivity {
         if(Ngayphathanh.getText().toString().length() == 0){
             ThongBao.Toast(TaoPhim.this,"Vui lòng chọn Ngày phát hành phim!");
         }
+
         HashMap<String, RequestBody> map = new HashMap<>();
         map.put("name",mName);
         map.put("genre",mTheloai);
         map.put("releaseDate",mNgayphathanh);
         map.put("content",mMota);
+        processBuilder.setVisibility(View.VISIBLE);
+        TaoPhim.setVisibility(View.GONE);
 
         apiService = APIUtils.getAPIService();
         apiService.postFilm(map,body).enqueue(new Callback<ResponseBody>() {
@@ -321,8 +346,12 @@ public class TaoPhim extends AppCompatActivity {
                 {
                     ThongBao.Toast(TaoPhim.this,"Đăng phim thành công!");
                     finish();
+                    processBuilder.setVisibility(View.GONE);
+                    TaoPhim.setVisibility(View.VISIBLE);
                 }else {
                     ThongBao.Toast(TaoPhim.this,"Có lỗi xảy ra! Vui lòng thử lại.");
+                    processBuilder.setVisibility(View.GONE);
+                    TaoPhim.setVisibility(View.VISIBLE);
                 }
             }
 
@@ -332,5 +361,4 @@ public class TaoPhim extends AppCompatActivity {
             }
         });
     }
-
 }

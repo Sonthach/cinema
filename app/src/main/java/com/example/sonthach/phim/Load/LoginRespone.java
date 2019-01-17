@@ -10,6 +10,8 @@ public class LoginRespone {
         this.user = user;
     }
 
+    public LoginRespone() {}
+
     public LoginRespone(String token1) {
         this.token = token1;
     }

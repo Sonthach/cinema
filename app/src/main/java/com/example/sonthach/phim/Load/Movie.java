@@ -3,7 +3,9 @@ package com.example.sonthach.phim.Load;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Movie {
+import java.io.Serializable;
+
+public class Movie implements Serializable {
     @SerializedName("films")
     @Expose
     private Filmss films;
@@ -23,11 +25,23 @@ public class Movie {
     @Expose
     private String posterURL;
 
+    @SerializedName("content")
+    @Expose
+    private String content;
+
     public Movie(String name, String genre, long releaseDate, String posterURL) {
         this.name = name;
         this.genre = genre;
         this.releaseDate = releaseDate;
         this.posterURL = posterURL;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public String getName() {

@@ -9,6 +9,7 @@
     android:paddingRight="0dp"
     android:paddingTop="0dp"
     tools:context=".RegisterActivity">
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -23,22 +24,30 @@
         android:text="ĐĂNG KÝ"
         android:layout_gravity="center"
         android:textSize="30sp"
-        android:textColor="#000000"
+        android:layout_marginTop="20dp"
+        android:textColor="#FF008577"
         android:textStyle="bold"/>
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
+        android:textColorHint="#FF008577"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/edittext_background"
         >
         <EditText
             android:id="@+id/txtregname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
-            android:hint="Name"
+            android:hint="Tên người dùng"
+            android:layout_marginTop="0dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
+
             />
     </android.support.design.widget.TextInputLayout>
 
@@ -46,6 +55,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:textColorHint="#FF008577"
+        android:layout_margin="10dp"
+        android:background="@drawable/edittext_background"
         >
 
         <EditText
@@ -55,13 +67,17 @@
             android:hint="Email"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            />
     </android.support.design.widget.TextInputLayout>
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        app:passwordToggleEnabled="true">
+        app:passwordToggleEnabled="true"
+        android:textColorHint="#FF008577"
+        android:layout_margin="10dp"
+        android:background="@drawable/edittext_background">
         <EditText
             android:id="@+id/txtregpassword"
             android:layout_width="match_parent"
@@ -70,6 +86,7 @@
             android:hint="Mật khẩu"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
+
             />
     </android.support.design.widget.TextInputLayout>
 
@@ -77,7 +94,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        app:passwordToggleEnabled="true">
+        android:textColorHint="#FF008577"
+        app:passwordToggleEnabled="true"
+        android:layout_margin="10dp"
+        android:background="@drawable/edittext_background">
         <EditText
             android:id="@+id/txtcomfirmpassword"
             android:layout_width="match_parent"
@@ -86,8 +106,16 @@
             android:hint="Xác nhận lại mật khẩu"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
+            android:textColorHint="#FF008577"
+
             />
     </android.support.design.widget.TextInputLayout>
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="120dp"
+            android:visibility="gone"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
 
     <ProgressBar
         android:layout_width="match_parent"
@@ -98,24 +126,27 @@
     <Button
         android:id="@+id/buttonregister"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
         android:text="ĐĂNG KÝ"
-        android:backgroundTint="@color/colorPrimary"
-        android:background="@color/colorPrimary"
+
+        android:background="@drawable/button_background"
         android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"/>
+        android:layout_marginRight="30dp"
+        android:textColor="#fff"
+        />
 
     <Button
         android:id="@+id/buttonlogin"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginTop="10dp"
         android:text="ĐĂNG NHẬP"
         android:backgroundTint="@color/colorPrimary"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/button_background"
         android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"/>
+        android:layout_marginRight="30dp"
+        android:textColor="#fff"/>
 
     </LinearLayout>
     </ScrollView>

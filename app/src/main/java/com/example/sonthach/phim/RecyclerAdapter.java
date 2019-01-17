@@ -1,6 +1,8 @@
 package com.example.sonthach.phim;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,6 +17,8 @@ import com.bumptech.glide.annotation.GlideModule;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.sonthach.phim.Load.Filmss;
 import com.example.sonthach.phim.Load.Movie;
+
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -25,15 +29,15 @@ import java.util.List;
 
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyViewHolder>{
-    private List<Movie> movies;
-    Context context;
+    List<Movie> movies;
+    List<Movie> moviesSearch = new ArrayList<>();// List dùng để Search
+    final Context context;
 
     public RecyclerAdapter(List<Movie> movie,Context context) {
         this.movies = movie;
+        this.moviesSearch.addAll(movies);
         this.context = context;
     }
-
-
 
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -48,24 +52,24 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
         String url = "https://cinema-hatin.herokuapp.com";
         MyViewHolder holders = holder;
-        Movie movie = movies.get(pos);
-        holder.txtTenphim.setText("Tên phim: "+movie.getName());
-        holder.txtTheloai.setText("Thể loại: "+movie.getGenre());
+        Movie movie = moviesSearch.get(pos);
+        holder.txtTenphim.setText(movie.getName());
+        holder.txtTheloai.setText(movie.getGenre());
 
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         String dateString = formatter.format(new Date(movie.getReleaseDate()));
 
-        holder.txtNgayphathanh.setText("Ngày phát hành: \n"+dateString);
+        holder.txtNgayphathanh.setText(dateString);
         Glide.with(context).setDefaultRequestOptions(requestOptions).load(url+movie.getPosterURL()).into(holder.poster);
 
     }
     @Override
     public int getItemCount() {
-        return movies.size();
+        return moviesSearch.size();
     }
 
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView poster;
         TextView txtTenphim,txtTheloai,txtNgayphathanh;
 
@@ -75,13 +79,47 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             txtTenphim = itemView.findViewById(R.id.txttenphim);
             txtTheloai = itemView.findViewById(R.id.txttheloai);
             txtNgayphathanh = itemView.findViewById(R.id.txtngayphathanh);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context,ProductDetails.class);
+                    intent.putExtra("thongtinphim", (Serializable) moviesSearch.get(getPosition()));
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    ThongBao.Toast(context,moviesSearch.get(getPosition()).getName());
+                    context.startActivity(intent);
+                }
+            });
         }
     }
 
-    public void setFilter(List<Movie> listitem)
+    public void setFilter(String newText)
     {
-        movies = new ArrayList<>();
-        movies.addAll(listitem);
-        notifyDataSetChanged();
+        newText = newText.toLowerCase();
+        if(newText.equals(""))
+        {
+            moviesSearch.clear();
+            moviesSearch.addAll(movies);
+            notifyDataSetChanged();
+            return;
+        }else
+        {
+            moviesSearch.clear();
+            for(Movie model : movies)
+            {
+                String sName;
+                if(model.getName() != null)
+                {
+                    sName = model.getName().toLowerCase();
+                }else
+                {
+                    sName = "";
+                }
+                if(sName.contains(newText)) {
+                    moviesSearch.add(model);
+                    notifyDataSetChanged();
+                }
+            }
+        }
+
     }
 }

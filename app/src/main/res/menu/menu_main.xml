@@ -5,7 +5,8 @@
         android:id="@+id/action_search"
         android:orderInCategory="100"
         android:title="Tìm Phim"
-        android:icon="@drawable/ic_search"
+        android:icon="@drawable/search"
+
         app:showAsAction="always"
         app:actionViewClass="android.support.v7.widget.SearchView"/>
 

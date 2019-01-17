@@ -1,61 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:card_view="http://schemas.android.com/tools"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginTop="7dp"
+    android:layout_marginBottom="7dp"
+
+    app:cardElevation="@dimen/cardview_default_elevation"
+    app:cardCornerRadius="10dp"
+
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-        <android.support.v7.widget.CardView
-            android:layout_width="2000dp"
-            android:layout_height="150dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="7dp"
-            android:layout_marginBottom="7dp"
-            app:cardElevation="@dimen/cardview_default_elevation"
-            app:cardCornerRadius="10dp"
-
-            >
                 <ImageView
                     android:layout_width="130dp"
-                    android:layout_height="170dp"
-                    android:layout_marginLeft="10dp"
-                    android:paddingBottom="20dp"
+                    android:layout_height="130dp"
+                    android:layout_margin="10dp"
                     android:id="@+id/ctposter"
-                    android:src="@drawable/ic_launcher_background"/>
+                    android:src="@drawable/filmnon"/>
 
-        <TextView
-            android:id="@+id/txttenphim"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Ten phim111111111\n"
-            android:layout_toRightOf="@id/ctposter"
-            android:layout_marginLeft="190dp"
-            android:textSize="20dp"
-            />
-        <TextView
-            android:id="@+id/txttheloai"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="The loai\n"
-            android:layout_toRightOf="@id/ctposter"
-            android:layout_marginLeft="190dp"
-            android:layout_below="@id/txttenphim"
-            android:textSize="20dp"
-            android:paddingTop="20dp"
-            android:layout_marginTop="30dp"
-            />
-        <TextView
-            android:id="@+id/txtngayphathanh"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Ngay phat hanh"
-            android:layout_toRightOf="@id/ctposter"
-            android:layout_marginLeft="190dp"
-            android:paddingTop="60dp"
-            android:layout_below="@id/txttheloai"
-            android:textSize="20dp"
-            android:layout_marginTop="30dp"
-            />
-        </android.support.v7.widget.CardView>
+                <TextView
+                    android:id="@+id/txttenphim"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="1"
+                    android:textSize="25dp"
+                    android:maxLines="4"
+                    android:ellipsize="end"
+                    android:layout_below="@id/ctposter"
+                    android:layout_marginLeft="150dp"
+                    android:layout_marginTop="2dp"
+                    />
 
-</RelativeLayout>
+                <TextView
+                    android:id="@+id/txttheloai"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1"
+                    android:layout_toRightOf="@id/ctposter"
+                    android:layout_marginLeft="150dp"
+                    android:layout_below="@id/txttenphim"
+                    android:textSize="20dp"
+                    android:paddingTop="20dp"
+                    android:layout_marginTop="50dp"
+                    />
+
+
+                <TextView
+                    android:id="@+id/txtngayphathanh"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1"
+                    android:layout_toRightOf="@id/ctposter"
+                    android:layout_marginLeft="150dp"
+                    android:paddingTop="60dp"
+                    android:layout_below="@id/txttheloai"
+                    android:textSize="20dp"
+                    android:layout_marginTop="50dp"
+                    />
+</android.support.v7.widget.CardView>

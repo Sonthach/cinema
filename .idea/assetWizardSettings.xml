@@ -33,7 +33,10 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="outputName" value="ic_plus" />
+                                      <entry key="assetType" value="IMAGE" />
+                                      <entry key="iconShape" value="NONE" />
+                                      <entry key="imageAsset" value="D:\movie.png" />
+                                      <entry key="outputName" value="logoapp" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -69,7 +72,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/E:/Program%20Learning/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/content/ic_add_black_24dp.xml" />
+                                      <entry key="url" value="jar:file:/E:/Program%20Learning/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/social/ic_person_black_24dp.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -79,7 +82,7 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_plus" />
+                            <entry key="outputName" value="ic_user" />
                             <entry key="sourceFile" value="C:\Users\SonThach" />
                           </map>
                         </option>
