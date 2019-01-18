@@ -1,6 +1,7 @@
 package com.example.sonthach.phim;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
@@ -9,6 +10,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Environment;
@@ -31,6 +33,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v7.widget.Toolbar;
 
+import com.example.sonthach.phim.Load.Filmss;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -40,9 +44,11 @@ import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -51,6 +57,7 @@ import okhttp3.ResponseBody;
 import retrofit2.Callback;
 
 public class TaoPhim extends AppCompatActivity {
+
     String IMAGE_PATH ="";
     Toolbar toolbar;
     private Uri imageToUploadUri;
@@ -175,6 +182,7 @@ public class TaoPhim extends AppCompatActivity {
        spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
            @Override
            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+               ((TextView) adapterView.getChildAt(0)).setTextColor(Color.BLACK);
                spPosition = i;
            }
 
@@ -312,53 +320,109 @@ public class TaoPhim extends AppCompatActivity {
         }
 
         File file = new File(IMAGE_PATH);
-        RequestBody mName = RequestBody.create(MediaType.parse("text/plain"),Tenphim.getText().toString().trim());
-        RequestBody mMota = RequestBody.create(MediaType.parse("text/plain"),Mota.getText().toString().trim());
-        RequestBody mNgayphathanh = RequestBody.create(MediaType.parse("text/plain"),releaseDate);
-        RequestBody mTheloai = RequestBody.create(MediaType.parse("text/plain"),spin.getSelectedItem().toString());
-        RequestBody requestFile = RequestBody.create(MediaType.parse("image/*"), file);
-        MultipartBody.Part body =
-                MultipartBody.Part.createFormData("file", file.getName(), requestFile);
+        if (!IMAGE_PATH.equals(""))
+        {
+            List<Filmss> filmsses = new ArrayList<>();
+            String idcreator ="";
+            RequestBody mName = RequestBody.create(MediaType.parse("text/plain"),Tenphim.getText().toString().trim());
+            RequestBody mMota = RequestBody.create(MediaType.parse("text/plain"),Mota.getText().toString().trim());
+            RequestBody mNgayphathanh = RequestBody.create(MediaType.parse("text/plain"),releaseDate);
+            RequestBody mTheloai = RequestBody.create(MediaType.parse("text/plain"),spin.getSelectedItem().toString());
 
-        if(Tenphim.getText().toString().length() == 0){
-            ThongBao.Toast(TaoPhim.this,"Vui lòng nhập Tên phim!");
-        }
-        if(Mota.getText().toString().length() == 0){
-            ThongBao.Toast(TaoPhim.this,"Vui lòng nhập Mô tả phim!");
-        }
-        if(Ngayphathanh.getText().toString().length() == 0){
-            ThongBao.Toast(TaoPhim.this,"Vui lòng chọn Ngày phát hành phim!");
-        }
+            RequestBody requestFile = RequestBody.create(MediaType.parse("image/*"), file);
+            MultipartBody.Part body =
+                    MultipartBody.Part.createFormData("file", file.getName(), requestFile);
 
-        HashMap<String, RequestBody> map = new HashMap<>();
-        map.put("name",mName);
-        map.put("genre",mTheloai);
-        map.put("releaseDate",mNgayphathanh);
-        map.put("content",mMota);
-        processBuilder.setVisibility(View.VISIBLE);
-        TaoPhim.setVisibility(View.GONE);
+            if(Tenphim.getText().toString().length() == 0){
+                ThongBao.Toast(TaoPhim.this,"Vui lòng nhập Tên phim!");
+            }
+            if(Mota.getText().toString().length() == 0){
+                ThongBao.Toast(TaoPhim.this,"Vui lòng nhập Mô tả phim!");
+            }
+            if(Ngayphathanh.getText().toString().length() == 0){
+                ThongBao.Toast(TaoPhim.this,"Vui lòng chọn Ngày phát hành phim!");
+            }
 
-        apiService = APIUtils.getAPIService();
-        apiService.postFilm(map,body).enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(retrofit2.Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
-                if(response.isSuccessful())
-                {
-                    ThongBao.Toast(TaoPhim.this,"Đăng phim thành công!");
-                    finish();
-                    processBuilder.setVisibility(View.GONE);
-                    TaoPhim.setVisibility(View.VISIBLE);
-                }else {
-                    ThongBao.Toast(TaoPhim.this,"Có lỗi xảy ra! Vui lòng thử lại.");
-                    processBuilder.setVisibility(View.GONE);
-                    TaoPhim.setVisibility(View.VISIBLE);
+            HashMap<String, RequestBody> map = new HashMap<>();
+            map.put("name",mName);
+            map.put("genre",mTheloai);
+            map.put("releaseDate",mNgayphathanh);
+            map.put("content",mMota);
+            processBuilder.setVisibility(View.VISIBLE);
+            TaoPhim.setVisibility(View.GONE);
+
+            apiService = APIUtils.getAPIService();
+            apiService.postFilm(map,body).enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(retrofit2.Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
+                    if(response.isSuccessful())
+                    {
+                        ThongBao.Toast(TaoPhim.this,"Đăng phim thành công!");
+                        finish();
+                        processBuilder.setVisibility(View.GONE);
+                        TaoPhim.setVisibility(View.VISIBLE);
+                    }else {
+                        ThongBao.Toast(TaoPhim.this,"Có lỗi xảy ra! Vui lòng thử lại.");
+                        processBuilder.setVisibility(View.GONE);
+                        TaoPhim.setVisibility(View.VISIBLE);
+                    }
                 }
+
+                @Override
+                public void onFailure(retrofit2.Call<ResponseBody> call, Throwable t) {
+                    ThongBao.Toast(TaoPhim.this,t.getMessage());
+                }
+            });
+        }else {
+
+            RequestBody mName = RequestBody.create(MediaType.parse("text/plain"),Tenphim.getText().toString().trim());
+            RequestBody mMota = RequestBody.create(MediaType.parse("text/plain"),Mota.getText().toString().trim());
+            RequestBody mNgayphathanh = RequestBody.create(MediaType.parse("text/plain"),releaseDate);
+            RequestBody mTheloai = RequestBody.create(MediaType.parse("text/plain"),spin.getSelectedItem().toString());
+
+            //RequestBody requestFile = RequestBody.create(MediaType.parse("image/*"), file);
+
+            if(Tenphim.getText().toString().length() == 0){
+                ThongBao.Toast(TaoPhim.this,"Vui lòng nhập Tên phim!");
+            }
+            if(Mota.getText().toString().length() == 0){
+                ThongBao.Toast(TaoPhim.this,"Vui lòng nhập Mô tả phim!");
+            }
+            if(Ngayphathanh.getText().toString().length() == 0){
+                ThongBao.Toast(TaoPhim.this,"Vui lòng chọn Ngày phát hành phim!");
             }
 
-            @Override
-            public void onFailure(retrofit2.Call<ResponseBody> call, Throwable t) {
-                ThongBao.Toast(TaoPhim.this,t.getMessage());
-            }
-        });
+            HashMap<String, RequestBody> map = new HashMap<>();
+            map.put("name",mName);
+            map.put("genre",mTheloai);
+            map.put("releaseDate",mNgayphathanh);
+            map.put("content",mMota);
+            processBuilder.setVisibility(View.VISIBLE);
+            TaoPhim.setVisibility(View.GONE);
+
+            apiService = APIUtils.getAPIService();
+            apiService.postfilmnoimage(map).enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(retrofit2.Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
+                    if(response.isSuccessful())
+                    {
+                        ThongBao.Toast(TaoPhim.this,"Đăng phim thành công!");
+                        finish();
+                        processBuilder.setVisibility(View.GONE);
+                        TaoPhim.setVisibility(View.VISIBLE);
+                    }else {
+                        ThongBao.Toast(TaoPhim.this,"Có lỗi xảy ra! Vui lòng thử lại.");
+                        processBuilder.setVisibility(View.GONE);
+                        TaoPhim.setVisibility(View.VISIBLE);
+                    }
+                }
+
+                @Override
+                public void onFailure(retrofit2.Call<ResponseBody> call, Throwable t) {
+                    ThongBao.Toast(TaoPhim.this,t.getMessage());
+                }
+            });
+        }
+
     }
 }

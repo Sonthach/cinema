@@ -4,11 +4,17 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Movie implements Serializable {
     @SerializedName("films")
     @Expose
     private Filmss films;
+
+    @SerializedName("_id")
+    @Expose
+    private String id;
+
     @SerializedName("name")
     @Expose
     private String name;
@@ -33,11 +39,32 @@ public class Movie implements Serializable {
     @Expose
     private String creatorId;
 
+    /*@SerializedName("user")
+    @Expose
+    List<User> user;*/
+
+    /*public List<User> getUser() {
+        return user;
+    }
+
+    public void setUser(List<User> user) {
+        this.user = user;
+    }*/
+
+
     public Movie(String name, String genre, long releaseDate, String posterURL) {
         this.name = name;
         this.genre = genre;
         this.releaseDate = releaseDate;
         this.posterURL = posterURL;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getCreatorId() {

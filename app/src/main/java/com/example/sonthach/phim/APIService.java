@@ -1,7 +1,9 @@
 package com.example.sonthach.phim;
 
+import com.example.sonthach.phim.Load.Cinema;
 import com.example.sonthach.phim.Load.Filmss;
 import com.example.sonthach.phim.Load.LoginRespone;
+import com.example.sonthach.phim.Load.Movie;
 
 
 import java.util.Map;
@@ -12,6 +14,7 @@ import okhttp3.ResponseBody;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
@@ -28,7 +31,13 @@ public interface APIService {
             @Part MultipartBody.Part photo
             );
 
-    @GET("api/cinema/")
+    @Multipart
+    @POST("/api/cinema/")
+    Call<ResponseBody> postfilmnoimage(
+            @PartMap() Map<String, RequestBody> partMap
+    );
+
+    @GET("/api/cinema/")
     Call<Filmss> getAllMovie();
 
     @FormUrlEncoded
@@ -46,4 +55,11 @@ public interface APIService {
             @Field("password") String password
     );
 
+
+    @GET("/api/cinema/{id}")
+    Call<Cinema> productdetails(@Path("id") String id );
+
+    @FormUrlEncoded
+    @POST("/api/auth/user")
+    Call<LoginRespone> getUser(@Field("token") String token);
 }

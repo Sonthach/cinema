@@ -14,6 +14,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
@@ -28,6 +29,7 @@ import android.support.v7.widget.Toolbar;
 import com.bumptech.glide.annotation.GlideModule;
 import com.example.sonthach.phim.Load.Filmss;
 import com.example.sonthach.phim.Load.Movie;
+import com.example.sonthach.phim.Load.User;
 
 
 import java.util.ArrayList;
@@ -67,10 +69,10 @@ public class DanhsachphimAcitivity extends AppCompatActivity {
         fab = findViewById(R.id.fttaophim);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
         LinearLayoutManager layoutManager = new LinearLayoutManager(DanhsachphimAcitivity.this);
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(layoutManager);
+        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        recyclerView.setLayoutManager(new GridLayoutManager(this,3));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-
+        loadAgainListFilms();
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -81,33 +83,9 @@ public class DanhsachphimAcitivity extends AppCompatActivity {
         ftuser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(DanhsachphimAcitivity.this, android.R.style.Theme_DeviceDefault_Light_Dialog);
-                builder.setTitle("Bạn có chắn chắn muốn đăng xuất ?");
-                builder.setMessage("Hãy lựa chọn bên dưới để xác nhận !");
-                builder.setIcon(android.R.drawable.ic_dialog_alert);
-                builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        SharedPreferences sharedPreferences = getSharedPreferences("SaveToken",MODE_PRIVATE);
-                        SharedPreferences.Editor editor = sharedPreferences.edit();
-                        editor.clear();
-                        editor.commit();
-                        finish();
-                        startActivity(new Intent(DanhsachphimAcitivity.this,MainActivity.class));
-                    }
-                });
-                builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                    }
-                });
-                builder.show();
+                startActivity(new Intent(DanhsachphimAcitivity.this,ProfileUser.class));
             }
         });
-
-        apiService = APIUtils.getAPIService();
-
     }
 
 
@@ -140,11 +118,13 @@ public class DanhsachphimAcitivity extends AppCompatActivity {
         apiService.getAllMovie().enqueue(new Callback<Filmss>() {
             @Override
             public void onResponse(Call<Filmss> call, Response<Filmss> response) {
-                movies = response.body().getMovie();
-                adapter = new RecyclerAdapter(movies, DanhsachphimAcitivity.this);
-                recyclerView.setAdapter(adapter);
-                adapter.notifyDataSetChanged();
-                progressDialog.dismiss();
+                if(response.isSuccessful()) {
+                    movies = response.body().getMovie();
+                    adapter = new RecyclerAdapter(movies, DanhsachphimAcitivity.this);
+                    recyclerView.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+                    progressDialog.dismiss();
+                }
             }
 
             @Override
@@ -182,6 +162,7 @@ public class DanhsachphimAcitivity extends AppCompatActivity {
         inflater.inflate(R.menu.menu_main,menu);
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         final SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+        
         MenuItem searchMenuItem = menu.findItem(R.id.action_search);
 
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));

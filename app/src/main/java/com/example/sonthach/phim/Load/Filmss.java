@@ -10,6 +10,18 @@ public class Filmss {
     @Expose
     List<Movie> movie;
 
+    /*@SerializedName("cinema")
+    @Expose
+    private Cinema cinema;
+
+    public Cinema getCinema() {
+        return cinema;
+    }
+
+    public void setCinema(Cinema cinema) {
+        this.cinema = cinema;
+    }*/
+
     public List<Movie> getMovie() {
         return movie;
     }

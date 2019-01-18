@@ -13,13 +13,13 @@
         android:layout_gravity="center"
         android:textSize="30dp"
         android:textStyle="bold"
-        android:textColor="#FF008577"
+        android:textColor="?attr/colorPrimary"
         android:layout_marginTop="70dp"/>
     <android.support.design.widget.TextInputLayout
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:textColorHint="#FF008577"
+        android:textColorHint="?attr/colorPrimary"
         android:layout_marginLeft="45dp"
         android:background="@drawable/edittext_background"
         >
@@ -42,7 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         app:passwordToggleEnabled="true"
-        android:textColorHint="#FF008577"
+        android:textColorHint="?attr/colorPrimary"
         android:layout_marginLeft="45dp"
         android:background="@drawable/edittext_background">
         <EditText

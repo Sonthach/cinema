@@ -5,23 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ProductDetails"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
     <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:id="@+id/tbchitietphim"
         app:title="Chi tiết Phim"
-        android:background="#FFF">
+        android:background="?attr/colorPrimary">
     </android.support.v7.widget.Toolbar>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:background="#fff"
-            android:layout_margin="15dp"
-            >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:background="#DDDDDD"
+        >
             <ImageView
                 android:id="@+id/poster_chitiet"
                 android:layout_width="100dp"
@@ -31,21 +30,36 @@
                 android:layout_gravity="center"
                 android:scaleType="fitXY"
                 />
-        </LinearLayout>
+    </LinearLayout>
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginTop="20dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tên phim: "
                 android:id="@+id/chitiet_tenphim"
                 android:textSize="25dp"
-                android:layout_margin="10dp"/>
+                android:textStyle="bold"
+                android:layout_margin="10dp"
+                />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="15dp"
+                android:background="@color/grey"/>
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:background="#DDDDDD"
+          android:orientation="vertical">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -53,22 +67,43 @@
                 android:id="@+id/chitiet_theloai"
                 android:textSize="25dp"
                 android:layout_margin="10dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#DDDDDD"
+                android:orientation="vertical">
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/grey"/>
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Ngày phát hành: "
                 android:id="@+id/chitiet_ngayphathanh"
                 android:textSize="25dp"
                 android:layout_margin="10dp"/>
-
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/grey"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Người tạo: "
                 android:id="@+id/chitiet_nguoitao"
                 android:textSize="25dp"
-                android:layout_margin="10dp"/>
+                android:layout_margin="10dp"
+                />
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/grey"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -76,7 +111,8 @@
                 android:id="@+id/chitiet_mota"
                 android:textSize="25dp"
                 android:layout_margin="10dp"/>
-
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
         </ScrollView>
 </LinearLayout>

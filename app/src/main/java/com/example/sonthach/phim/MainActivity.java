@@ -33,9 +33,9 @@ public class MainActivity extends AppCompatActivity {
         String i = pre.getString("id","");
         if(!s.equals("") && !i.equals(""))
         {
-            finish();
             Intent intent = new Intent(MainActivity.this,DanhsachphimAcitivity.class);
             startActivity(intent);
+            finish();
         }
         progressBar = findViewById(R.id.idproressbar);
         edtEmail = findViewById(R.id.txtloginemail);
@@ -106,7 +106,6 @@ public class MainActivity extends AppCompatActivity {
                 ThongBao.Toast(MainActivity.this,t.getMessage());
             }
         });
-
     }
 
 
@@ -136,6 +135,7 @@ public class MainActivity extends AppCompatActivity {
                     editor.putString("token",save);
                     editor.commit();
                     Intent intent = new Intent(MainActivity.this,DanhsachphimAcitivity.class);
+                    intent.putExtra("getToken", loginRespone.getToken());
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                 }else {

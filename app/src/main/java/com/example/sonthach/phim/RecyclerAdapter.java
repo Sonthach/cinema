@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.annotation.GlideModule;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.sonthach.phim.Load.Cinema;
 import com.example.sonthach.phim.Load.Filmss;
 import com.example.sonthach.phim.Load.Movie;
 
@@ -23,6 +24,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -33,6 +35,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     List<Movie> moviesSearch = new ArrayList<>();// List dùng để Search
     final Context context;
 
+
     public RecyclerAdapter(List<Movie> movie,Context context) {
         this.movies = movie;
         this.moviesSearch.addAll(movies);
@@ -41,7 +44,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_rv,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.test_ui_danhsachphim,parent,false);
         return new MyViewHolder(view);
     }
 
@@ -54,12 +57,16 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         MyViewHolder holders = holder;
         Movie movie = moviesSearch.get(pos);
         holder.txtTenphim.setText(movie.getName());
-        holder.txtTheloai.setText(movie.getGenre()+"     -");
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis (movie.getReleaseDate());
+        int year = calendar.get(Calendar.YEAR);
+        /*holder.txtTheloai.setText(movie.getGenre()+"     -");*/
 
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         String dateString = formatter.format(new Date(movie.getReleaseDate()));
 
-        holder.txtNgayphathanh.setText(dateString);
+        holder.txtNgayphathanh.setText(String.valueOf(year));
         Glide.with(context).setDefaultRequestOptions(requestOptions).load(url+movie.getPosterURL()).into(holder.poster);
 
     }
@@ -83,9 +90,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(context,ProductDetails.class);
-                    intent.putExtra("thongtinphim", (Serializable) moviesSearch.get(getPosition()));
+                    intent.putExtra("id", moviesSearch.get(getAdapterPosition()).getId());
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    //ThongBao.Toast(context,moviesSearch.get(getPosition()).getName());
                     context.startActivity(intent);
                 }
             });

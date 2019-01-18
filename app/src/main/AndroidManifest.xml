@@ -30,7 +30,8 @@
         <activity android:name=".DanhsachphimAcitivity" />
         <activity android:name=".TaoPhim" />
         <activity android:name=".RegisterActivity" />
-        <activity android:name=".ProductDetails"></activity>
+        <activity android:name=".ProductDetails" />
+        <activity android:name=".ProfileUser"></activity>
     </application>
 
 </manifest>

@@ -6,9 +6,7 @@
         android:orderInCategory="100"
         android:title="Tìm Phim"
         android:icon="@drawable/search"
-
         app:showAsAction="always"
-        app:actionViewClass="android.support.v7.widget.SearchView"/>
-
-
+        app:actionViewClass="android.support.v7.widget.SearchView"
+        />
 </menu>
