@@ -14,6 +14,32 @@ public class Filmss {
     @Expose
     private String creatorId;
 
+    @SerializedName("_id")
+    @Expose
+    private String id;
+
+    @SerializedName("cinema")
+    @Expose
+    private Cinema cinema;
+
+    public Cinema getCinema() {
+        return cinema;
+    }
+
+    public void setCinema(Cinema cinema) {
+        this.cinema = cinema;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+
+
     //@SerializedName("films")
     //private Movie movies;
 

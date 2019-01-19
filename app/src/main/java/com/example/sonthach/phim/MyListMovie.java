@@ -1,93 +1,71 @@
 package com.example.sonthach.phim;
 
 import android.Manifest;
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.app.SearchManager;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Adapter;
-import android.widget.ListView;
-import android.support.v7.widget.SearchView;
-import android.support.v7.widget.Toolbar;
 
-import com.bumptech.glide.annotation.GlideModule;
 import com.example.sonthach.phim.Load.Filmss;
 import com.example.sonthach.phim.Load.Movie;
-import com.example.sonthach.phim.Load.User;
-
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.DuplicateFormatFlagsException;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-
-public class DanhsachphimAcitivity extends AppCompatActivity {
-    FloatingActionButton fab,ftuser;
+public class MyListMovie extends AppCompatActivity {
     Toolbar toolbar;
     Context context;
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private List<Movie> movies = new ArrayList<>();
-    private List<Movie> moviesFull = new ArrayList<>();
     private RecyclerAdapter adapter;
-    private String TAG = MainActivity.class.getSimpleName();
-    private APIService apiService;
-
-    // 2 arraylist, 1 cai chinh de chua du lieu tra ve, cai con lai chua du lieu sau khi tim xong dung de hien thi
+    APIService apiService;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_danhsachphim);
+        setContentView(R.layout.activity_mylistmovie);
         per();
 
         toolbar = findViewById(R.id.tbdanhsachphim);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Tìm Phim");
+        actionBar();
 
-        ftuser = findViewById(R.id.ftuser);
-        fab = findViewById(R.id.fttaophim);
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(DanhsachphimAcitivity.this);
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerviewdanhsachphim);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(MyListMovie.this);
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        recyclerView.setLayoutManager(new GridLayoutManager(this,2));
+        recyclerView.setLayoutManager(new GridLayoutManager(this,3));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         loadAgainListFilms();
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(DanhsachphimAcitivity.this,TaoPhim.class));
-            }
-        });
 
-        ftuser.setOnClickListener(new View.OnClickListener() {
+    }
+    private void actionBar() {
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(DanhsachphimAcitivity.this,ProfileUser.class));
+                finish();
             }
         });
     }
-
 
     private void per() {
         if (checkSelfPermission(Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED) {
@@ -110,7 +88,11 @@ public class DanhsachphimAcitivity extends AppCompatActivity {
     }
 
     private void loadAgainListFilms(){
-        final ProgressDialog progressDialog = new ProgressDialog(DanhsachphimAcitivity.this);
+        SharedPreferences pre = getSharedPreferences("SaveToken",MODE_PRIVATE);
+        SharedPreferences.Editor editor = pre.edit();
+        final String getCreatorId = pre.getString("id","");
+
+        final ProgressDialog progressDialog = new ProgressDialog(MyListMovie.this);
         progressDialog.setMessage("Đang tải dữ liệu...");
         progressDialog.show();
         APIService apiService;
@@ -118,12 +100,13 @@ public class DanhsachphimAcitivity extends AppCompatActivity {
         apiService.getAllMovie().enqueue(new Callback<Filmss>() {
             @Override
             public void onResponse(Call<Filmss> call, Response<Filmss> response) {
+                Filmss filmss = response.body();
                 if(response.isSuccessful()) {
-                    movies = response.body().getMovie();
-                    adapter = new RecyclerAdapter(movies, DanhsachphimAcitivity.this);
-                    recyclerView.setAdapter(adapter);
-                    adapter.notifyDataSetChanged();
-                    progressDialog.dismiss();
+                        movies = response.body().getMovie();
+                        adapter = new RecyclerAdapter(movies, MyListMovie.this);
+                        recyclerView.setAdapter(adapter);
+                        adapter.notifyDataSetChanged();
+                        progressDialog.dismiss();
                 }
             }
 
@@ -144,7 +127,7 @@ public class DanhsachphimAcitivity extends AppCompatActivity {
                 }
 
                 movies = response.body().getMovie();
-                adapter = new RecyclerAdapter(movies, DanhsachphimAcitivity.this);
+                adapter = new RecyclerAdapter(movies, MyListMovie.this);
                 recyclerView.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
             }
@@ -156,13 +139,13 @@ public class DanhsachphimAcitivity extends AppCompatActivity {
         });
     }
 
-    @Override
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_main,menu);
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         final SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
-        
+
         MenuItem searchMenuItem = menu.findItem(R.id.action_search);
 
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
@@ -181,6 +164,5 @@ public class DanhsachphimAcitivity extends AppCompatActivity {
         });
         searchMenuItem.getIcon().setVisible(false,false);
         return true;
-    }
+    }*/
 }
-

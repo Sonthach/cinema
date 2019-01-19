@@ -9,6 +9,7 @@ import com.example.sonthach.phim.Load.SignupResponse;
 import com.example.sonthach.phim.Load.User;
 
 
+import java.util.List;
 import java.util.Map;
 
 import okhttp3.MultipartBody;
@@ -42,6 +43,9 @@ public interface APIService {
 
     @GET("/api/cinema/")
     Call<Filmss> getAllMovie();
+
+    @GET("/api/cinema/")
+    Call<Movie> getMylistmovie();
 
     @FormUrlEncoded
     @POST ("/api/auth/signup")
@@ -81,4 +85,8 @@ public interface APIService {
     @POST("/api/user/change-avatar")
     Call<ErrorResponse> changeAvaterUser(@Header("x-access-token") String token,
                                          @Part MultipartBody.Part photo);
+
+    @FormUrlEncoded
+    @POST("/api/auth/reset-password")
+    Call<ErrorResponse> forgotPassword(@Field("email") String email);
 }

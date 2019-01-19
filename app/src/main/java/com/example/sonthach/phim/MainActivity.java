@@ -1,5 +1,6 @@
 package com.example.sonthach.phim;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
@@ -9,7 +10,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.sonthach.phim.Load.ErrorResponse;
 import com.example.sonthach.phim.Load.LoginRespone;
 import com.example.sonthach.phim.Load.User;
 
@@ -20,8 +24,11 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity {
     EditText edtEmail, edtPassword;
     Button btRegister, btLogin;
+    TextView txtQuenmatkhau;
     APIService apiService;
     ProgressBar progressBar;
+    String mPassword;
+    Button btnxacnhan,btnhuy;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,10 +48,69 @@ public class MainActivity extends AppCompatActivity {
         edtEmail = findViewById(R.id.txtloginemail);
         edtPassword = findViewById(R.id.txtloginpassword);
         btRegister = findViewById(R.id.buttonreg);
+        txtQuenmatkhau = findViewById(R.id.txtquenmatkhau);
         btLogin = findViewById(R.id.buttonlogin);
 
 
+        txtQuenmatkhau.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Dialog dialog = new Dialog(MainActivity.this);
+                dialog.setTitle("Quên mật khẩu");
+                dialog.setCancelable(false);
+                dialog.setContentView(R.layout.dialog_quenmatkhau);
+                btnxacnhan = dialog.findViewById(R.id.btnxacnhanquenmatkhau);
+                btnhuy = dialog.findViewById(R.id.btnhuyquenmatkhau);
+                final EditText edtquenmatkhau = dialog.findViewById(R.id.edtquenmatkhau);
 
+                btnxacnhan.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        mPassword = edtquenmatkhau.getText().toString().trim();
+
+                        if (mPassword.length() == 0)
+                        {
+                            ThongBao.Toast(MainActivity.this,"Vui lòng nhập Email!");
+                            return;
+                        }
+                        apiService = APIUtils.getAPIService();
+                        apiService.forgotPassword(mPassword).enqueue(new Callback<ErrorResponse>() {
+                            @Override
+                            public void onResponse(Call<ErrorResponse> call, Response<ErrorResponse> response) {
+                                ErrorResponse errorResponse = response.body();
+                                if (response.isSuccessful()) {
+                                    if (errorResponse.getStatus() == 200) {
+                                        ThongBao.Toast(MainActivity.this, "Yêu cầu thay đổi " +
+                                                "mật khẩu thành công. Vui lòng kiểm tra email ");
+                                        dialog.cancel();
+                                    } else {
+                                        ThongBao.Toast(MainActivity.this, "Yêu cầu thay đổi " +
+                                                "mật khẩu thất bại!Vui lòng thử lại. ");
+                                        dialog.cancel();
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<ErrorResponse> call, Throwable t) {
+                                ThongBao.Toast(MainActivity.this, "Yêu cầu thay đổi " +
+                                        "mật khẩu thất bại!Vui lòng thử lại. ");
+                                dialog.cancel();
+                            }
+                        });
+
+                    }
+                });
+
+                btnhuy.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.cancel();
+                    }
+                });
+                dialog.show();
+            }
+        });
 
         btRegister.setOnClickListener(new View.OnClickListener() {
             @Override

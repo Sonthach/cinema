@@ -174,10 +174,11 @@
                     android:layout_height="wrap_content">
 
                     <TextView
+                        android:id="@+id/txxdanhsachphim"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:text="Danh sách phim"
+                        android:text="Danh sách phim của tôi"
                         android:textColor="#000000"
                         android:textSize="18sp" />
                 </RelativeLayout>
@@ -195,7 +196,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginLeft="60dp"
+            android:layout_marginLeft="70dp"
             android:layout_marginTop="250dp"
             android:background="@drawable/button_background"
             android:gravity="center"

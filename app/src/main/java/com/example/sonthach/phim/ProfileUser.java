@@ -49,7 +49,7 @@ import retrofit2.Response;
 
 public class ProfileUser extends AppCompatActivity {
     Button btndangxuat,btnxacnhan,btnhuy,btnxacnnhandoiten,btnxacnhanhuyten;
-    TextView txtdoimatkhau,txtnameuser,txtemailuser,txtpassworduser;
+    TextView txtdoimatkhau,txtnameuser,txtemailuser,txtdanhsachphim;
     Toolbar toolbar;
     APIService apiService;
     String moldPassword,mnewPassword,mCofirmpassword,imgviewChangeName;
@@ -73,6 +73,15 @@ public class ProfileUser extends AppCompatActivity {
         imageViewchangeName = findViewById(R.id.imgchangename);
         txtdoimatkhau = findViewById(R.id.txtdoimatkhau);
         imgchangeavatar = findViewById(R.id.imgposter);
+        txtdanhsachphim = findViewById(R.id.txxdanhsachphim);
+
+        txtdanhsachphim.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ProfileUser.this,MyListMovie.class);
+                startActivity(intent);
+            }
+        });
 
 
         actionBar();
