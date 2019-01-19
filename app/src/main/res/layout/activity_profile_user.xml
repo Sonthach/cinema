@@ -26,15 +26,15 @@
             android:background="@drawable/circle_border"
             android:layout_centerHorizontal="true">
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/imgposter"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
+                android:layout_width="160dp"
+                android:layout_height="160dp"
                 android:src="@drawable/avatardefault"
-                android:adjustViewBounds="true"
-                android:scaleType="centerInside"
-                android:layout_margin="9dp"
-                android:padding="3dp"/>
+                app:civ_border_width="2dp"
+                app:civ_border_color="#FF000000"
+                android:padding="3dp">
+            </de.hdodenhof.circleimageview.CircleImageView>
         </RelativeLayout>
 
 
@@ -52,10 +52,9 @@
             />
         <Button
             android:id="@+id/imgchangename"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:background="@drawable/ic_edit"
-            android:layout_marginTop="185dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="205dp"
             android:layout_marginLeft="320dp"/>
 
     </RelativeLayout>

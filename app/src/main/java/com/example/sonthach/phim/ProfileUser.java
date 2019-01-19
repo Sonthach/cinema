@@ -183,7 +183,7 @@ public class ProfileUser extends AppCompatActivity {
         });
 
 
-        imageViewchangeName.setOnClickListener(new View.OnClickListener() {
+        txtnameuser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final Dialog dialog = new Dialog(ProfileUser.this);
