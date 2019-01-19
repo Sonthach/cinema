@@ -24,7 +24,7 @@
         android:text="ĐĂNG KÝ"
         android:layout_gravity="center"
         android:textSize="30sp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="80dp"
         android:textColor="?attr/colorPrimary"
         android:textStyle="bold"/>
 
@@ -58,6 +58,7 @@
         android:textColorHint="?attr/colorPrimary"
         android:layout_margin="10dp"
         android:background="@drawable/edittext_background"
+        android:inputType="textEmailAddress"
         >
 
         <EditText
@@ -67,7 +68,6 @@
             android:hint="Email"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:inputType="textEmailAddress"
             />
     </android.support.design.widget.TextInputLayout>
     <android.support.design.widget.TextInputLayout
@@ -94,7 +94,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:textColorHint="#FF008577"
+        android:textColorHint="?attr/colorPrimary"
         app:passwordToggleEnabled="true"
         android:layout_margin="10dp"
         android:background="@drawable/edittext_background">

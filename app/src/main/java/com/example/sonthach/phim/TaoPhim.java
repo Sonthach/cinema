@@ -7,6 +7,7 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -33,7 +34,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v7.widget.Toolbar;
 
+import com.bumptech.glide.request.RequestOptions;
 import com.example.sonthach.phim.Load.Filmss;
+import com.example.sonthach.phim.Load.Movie;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -322,13 +325,15 @@ public class TaoPhim extends AppCompatActivity {
         File file = new File(IMAGE_PATH);
         if (!IMAGE_PATH.equals(""))
         {
-            List<Filmss> filmsses = new ArrayList<>();
-            String idcreator ="";
+            SharedPreferences pre = getSharedPreferences("SaveToken",MODE_PRIVATE);
+            SharedPreferences.Editor editor = pre.edit();
+            String getCreatorId = pre.getString("id","");
+
             RequestBody mName = RequestBody.create(MediaType.parse("text/plain"),Tenphim.getText().toString().trim());
             RequestBody mMota = RequestBody.create(MediaType.parse("text/plain"),Mota.getText().toString().trim());
             RequestBody mNgayphathanh = RequestBody.create(MediaType.parse("text/plain"),releaseDate);
             RequestBody mTheloai = RequestBody.create(MediaType.parse("text/plain"),spin.getSelectedItem().toString());
-
+            RequestBody mCreatorId = RequestBody.create(MediaType.parse("text/plain"),getCreatorId);
             RequestBody requestFile = RequestBody.create(MediaType.parse("image/*"), file);
             MultipartBody.Part body =
                     MultipartBody.Part.createFormData("file", file.getName(), requestFile);
@@ -347,7 +352,9 @@ public class TaoPhim extends AppCompatActivity {
             map.put("name",mName);
             map.put("genre",mTheloai);
             map.put("releaseDate",mNgayphathanh);
+            map.put("creatorId",mCreatorId);
             map.put("content",mMota);
+
             processBuilder.setVisibility(View.VISIBLE);
             TaoPhim.setVisibility(View.GONE);
 
@@ -374,11 +381,14 @@ public class TaoPhim extends AppCompatActivity {
                 }
             });
         }else {
-
+            SharedPreferences pre = getSharedPreferences("SaveToken",MODE_PRIVATE);
+            SharedPreferences.Editor editor = pre.edit();
+            String getCreatorId = pre.getString("id","");
             RequestBody mName = RequestBody.create(MediaType.parse("text/plain"),Tenphim.getText().toString().trim());
             RequestBody mMota = RequestBody.create(MediaType.parse("text/plain"),Mota.getText().toString().trim());
             RequestBody mNgayphathanh = RequestBody.create(MediaType.parse("text/plain"),releaseDate);
             RequestBody mTheloai = RequestBody.create(MediaType.parse("text/plain"),spin.getSelectedItem().toString());
+            RequestBody mCreatorId = RequestBody.create(MediaType.parse("text/plain"),getCreatorId);
 
             //RequestBody requestFile = RequestBody.create(MediaType.parse("image/*"), file);
 
@@ -396,6 +406,7 @@ public class TaoPhim extends AppCompatActivity {
             map.put("name",mName);
             map.put("genre",mTheloai);
             map.put("releaseDate",mNgayphathanh);
+            map.put("creatorId",mCreatorId);
             map.put("content",mMota);
             processBuilder.setVisibility(View.VISIBLE);
             TaoPhim.setVisibility(View.GONE);

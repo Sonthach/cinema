@@ -17,6 +17,7 @@ import com.bumptech.glide.annotation.GlideModule;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.sonthach.phim.Load.Cinema;
 import com.example.sonthach.phim.Load.Filmss;
+import com.example.sonthach.phim.Load.ImageLoader;
 import com.example.sonthach.phim.Load.Movie;
 
 import java.io.Serializable;
@@ -28,6 +29,8 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import com.bumptech.glide.annotation.GlideModule;
+import com.bumptech.glide.module.AppGlideModule;
 
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyViewHolder>{
@@ -67,7 +70,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         String dateString = formatter.format(new Date(movie.getReleaseDate()));
 
         holder.txtNgayphathanh.setText(String.valueOf(year));
-        Glide.with(context).setDefaultRequestOptions(requestOptions).load(url+movie.getPosterURL()).into(holder.poster);
+        ImageLoader.getInstance().loadImage(context,url+movie.getPosterURL(),holder.poster,requestOptions);
+        //Glide.with(context).setDefaultRequestOptions(requestOptions).load(url+movie.getPosterURL()).into(holder.poster);
 
     }
     @Override

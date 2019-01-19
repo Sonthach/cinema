@@ -15,7 +15,11 @@ public class User {
     @Expose
     private String name;
 
+    @SerializedName("password")
+    @Expose
     private String password;
+
+
     private String userlink;
     private int __v;
     private String avatarURL;

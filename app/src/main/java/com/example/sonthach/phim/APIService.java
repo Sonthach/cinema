@@ -1,9 +1,12 @@
 package com.example.sonthach.phim;
 
 import com.example.sonthach.phim.Load.Cinema;
+import com.example.sonthach.phim.Load.ErrorResponse;
 import com.example.sonthach.phim.Load.Filmss;
 import com.example.sonthach.phim.Load.LoginRespone;
 import com.example.sonthach.phim.Load.Movie;
+import com.example.sonthach.phim.Load.SignupResponse;
+import com.example.sonthach.phim.Load.User;
 
 
 import java.util.Map;
@@ -42,7 +45,7 @@ public interface APIService {
 
     @FormUrlEncoded
     @POST ("/api/auth/signup")
-    Call<ResponseBody> signUp(
+    Call<SignupResponse> signUp(
             @Field("email") String email,
             @Field("name") String name,
             @Field("password") String password
@@ -61,5 +64,21 @@ public interface APIService {
 
     @FormUrlEncoded
     @POST("/api/auth/user")
-    Call<LoginRespone> getUser(@Field("token") String token);
+    Call<User> getUser(@Field("token") String token);
+
+    @FormUrlEncoded
+    @POST("/api/user/change-password")
+    Call<ErrorResponse> changePassword(@Header("x-access-token") String token,
+                                       @Field("oldPassword") String oldPassword,
+                                       @Field("newPassword") String newPassword);
+
+    @FormUrlEncoded
+    @POST("/api/user/edit")
+    Call<ErrorResponse> changeName(@Header("x-access-token") String token,
+                                   @Field("name") String name);
+
+    @Multipart
+    @POST("/api/user/change-avatar")
+    Call<ErrorResponse> changeAvaterUser(@Header("x-access-token") String token,
+                                         @Part MultipartBody.Part photo);
 }

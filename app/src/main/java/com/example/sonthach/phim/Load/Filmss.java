@@ -10,17 +10,28 @@ public class Filmss {
     @Expose
     List<Movie> movie;
 
-    /*@SerializedName("cinema")
+    @SerializedName("creatorId")
     @Expose
-    private Cinema cinema;
+    private String creatorId;
 
-    public Cinema getCinema() {
-        return cinema;
+    //@SerializedName("films")
+    //private Movie movies;
+
+    /*public Movie getMovies() {
+        return movies;
     }
 
-    public void setCinema(Cinema cinema) {
-        this.cinema = cinema;
+    public void setMovies(Movie movies) {
+        this.movies = movies;
     }*/
+
+    public String getCreatorId() {
+        return creatorId;
+    }
+
+    public void setCreatorId(String creatorId) {
+        this.creatorId = creatorId;
+    }
 
     public List<Movie> getMovie() {
         return movie;

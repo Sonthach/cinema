@@ -17,8 +17,10 @@ import android.widget.Toast;
 
 import com.example.sonthach.phim.Load.LoginRespone;
 import com.example.sonthach.phim.Load.Movie;
+import com.example.sonthach.phim.Load.SignupResponse;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 
 import okhttp3.MediaType;
@@ -88,41 +90,51 @@ public class RegisterActivity extends AppCompatActivity {
                 if(mName.length() == 0)
                 {
                     ThongBao.Toast(RegisterActivity.this,"Vui lòng nhập Tên");
+                    progressBar.setVisibility(View.GONE);
+                    Register.setVisibility(View.VISIBLE);
                 }
 
                 if(mEmail.length() == 0)
                 {
                     ThongBao.Toast(RegisterActivity.this,"Vui lòng nhập Email");
+                    progressBar.setVisibility(View.GONE);
+                    Register.setVisibility(View.VISIBLE);
                 }
 
                 if(mPassword.length() == 0)
                 {
                     ThongBao.Toast(RegisterActivity.this,"Vui lòng nhập Mật khẩu");
+                    progressBar.setVisibility(View.GONE);
+                    Register.setVisibility(View.VISIBLE);
                 }
 
                 if(!edtConfirm.getText().toString().equals(mPassword)){
                     ThongBao.Toast(RegisterActivity.this,"Mật khẩu xác nhận không đúng. Vui lòng nhập lại");
+                    progressBar.setVisibility(View.GONE);
+                    Register.setVisibility(View.VISIBLE);
                 }
 
-                Call<ResponseBody> call = RetrofitClient
+                Call<SignupResponse> call = RetrofitClient
                         .getInstance()
                         .getApi()
                         .signUp(mEmail,mName,mPassword);
-                call.enqueue(new Callback<ResponseBody>() {
+                call.enqueue(new Callback<SignupResponse>() {
                     @Override
-                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                        ResponseBody responseBody = response.body();
+                    public void onResponse(Call<SignupResponse> call, Response<SignupResponse> response) {
+                        SignupResponse signupResponse = response.body();
                         if(response.isSuccessful())
                         {
                             ThongBao.Toast(RegisterActivity.this,"Đăng ký thành công!");
                             progressBar.setVisibility(View.GONE);
                             Register.setVisibility(View.VISIBLE);
-
                             SharedPreferences pre =getSharedPreferences("SaveToken",MODE_PRIVATE);
-                            String token = pre.getString("token","");
-                            String id = pre.getString("id","");
                             SharedPreferences.Editor editor = pre.edit();
                             editor.clear();
+                            String saveToken = signupResponse.getToken();
+                            String saveId = signupResponse.getUser().getId();
+                            editor.putString("token",saveToken);
+                            editor.putString("id",saveId);
+                            editor.commit();
                             Intent intent = new Intent(RegisterActivity.this,DanhsachphimAcitivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
@@ -131,7 +143,7 @@ public class RegisterActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    public void onFailure(Call<SignupResponse> call, Throwable t) {
                         ThongBao.Toast(RegisterActivity.this,t.getMessage());
                         progressBar.setVisibility(View.GONE);
                         Register.setVisibility(View.VISIBLE);
@@ -149,7 +161,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
     private void checkconnection(){
 
-            if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+           /* if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                 requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                         1);
 
@@ -160,7 +172,7 @@ public class RegisterActivity extends AppCompatActivity {
                         1);
 
             }
-
+*/
             if (checkSelfPermission(Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED) {
                 requestPermissions(new String[]{Manifest.permission.INTERNET},
                         1);

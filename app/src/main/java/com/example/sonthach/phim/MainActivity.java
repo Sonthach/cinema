@@ -70,6 +70,8 @@ public class MainActivity extends AppCompatActivity {
         if(mEmail.length() == 0 || mPassword.length() == 0)
         {
             ThongBao.Toast(MainActivity.this,"Vui lòng nhập đủ thông tin!");
+            progressBar.setVisibility(View.GONE);
+            btLogin.setVisibility(View.VISIBLE);
         }
 
         apiService = APIUtils.getAPIService();
