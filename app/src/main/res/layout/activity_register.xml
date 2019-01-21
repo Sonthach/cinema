@@ -24,7 +24,7 @@
         android:text="ĐĂNG KÝ"
         android:layout_gravity="center"
         android:textSize="30sp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="60dp"
         android:textColor="?attr/colorPrimary"
         android:textStyle="bold"/>
 

@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".TaoPhim"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
 
     <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
@@ -21,7 +22,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="20dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -51,79 +53,74 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_margin="10dp"
-                android:textColorHint="?attr/colorPrimary"
-                android:background="@drawable/edittext_background">
+                android:text="Tên phim"
+                android:textSize="20dp"
+                android:textColor="@color/colorPrimary"/>
             <EditText
                 android:id="@+id/edtTenPhim"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="10dp"
                 android:hint="Tên phim"
+                android:background="@drawable/edittext_background"
               />
-            </android.support.design.widget.TextInputLayout>
 
         </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Thể loại phim"
+                android:textSize="20dp"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/colorPrimary"/>
+            <Spinner
+                android:id="@+id/spinnerOption"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:scrollbarSize="20dp"
+                >
+            </Spinner>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:outlineSpotShadowColor="#000"
-            android:outlineAmbientShadowColor="#000">
-
-            <Spinner
-                android:id="@+id/spinnerOption"
-                android:layout_width="match_parent"
+            android:layout_marginTop="20dp">
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_margin="5dp"
-                >
-
-            </Spinner>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:textColorHint="?attr/colorPrimary"
-                android:layout_margin="10dp"
-                android:background="@drawable/edittext_background">
+                android:text="Ngày phát hành"
+                android:textSize="20dp"
+                android:textColor="@color/colorPrimary"/>
             <TextView
                 android:id="@+id/edtNgayPhatHanh2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Ngày phát hành"
-                android:textSize="20dp"
                 android:textColor="#000"
+                android:layout_marginTop="10dp"
+                android:textSize="20dp"
                 />
-
-            </android.support.design.widget.TextInputLayout>
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="120dp"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mô tả"
+                android:textSize="20dp"
                 android:layout_marginTop="20dp"
-                android:textColorHint="?attr/colorPrimary"
-                android:layout_margin="10dp"
-                android:background="@drawable/edittext_background">
+                android:textColor="@color/colorPrimary"/>
             <EditText
                 android:id="@+id/edtMoTa"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:hint="Mô tả"
+                android:layout_height="70dp"
+                android:layout_marginTop="10dp"
                 android:inputType="text|textMultiLine"
+                android:background="@drawable/edittext_background"
+                android:hint="Nội dung mô tả"
                 />
-            </android.support.design.widget.TextInputLayout>
 
         </LinearLayout>
         <ProgressBar
@@ -136,7 +133,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
             <Button
                 android:id="@+id/btnTaoPhim"
                 android:layout_width="wrap_content"

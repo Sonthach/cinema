@@ -30,13 +30,34 @@
         >
             <ImageView
                 android:id="@+id/poster_chitiet"
-                android:layout_width="100dp"
+                android:layout_width="match_parent"
                 android:layout_height="190dp"
                 android:src="@drawable/filmnon"
                 android:foregroundGravity="center"
                 android:layout_gravity="center"
                 android:scaleType="fitXY"
                 />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/btnsua"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:text="Sửa"
+            android:layout_marginLeft="70dp"
+            android:textColor="#fff"
+            android:background="@drawable/button_background"/>
+
+        <Button
+            android:id="@+id/btnxoa"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:text="Xóa"
+            android:layout_marginLeft="50dp"
+            android:textColor="#fff"
+            android:background="@drawable/button_background"/>
+        </LinearLayout>
     </LinearLayout>
 
 

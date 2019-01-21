@@ -95,6 +95,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                 public void onClick(View view) {
                     Intent intent = new Intent(context,ProductDetails.class);
                     intent.putExtra("id", moviesSearch.get(getAdapterPosition()).getId());
+                    intent.putExtra("name", moviesSearch.get(getAdapterPosition()).getName());
+                    intent.putExtra("genre", moviesSearch.get(getAdapterPosition()).getGenre());
+                    intent.putExtra("releaseDate", moviesSearch.get(getAdapterPosition()).getReleaseDate());
+                    intent.putExtra("content", moviesSearch.get(getAdapterPosition()).getContent());
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intent);
                 }

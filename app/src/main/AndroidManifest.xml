@@ -31,8 +31,10 @@
         <activity android:name=".TaoPhim" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".ProductDetails" />
-        <activity android:name=".ProfileUser"></activity>
-        <activity android:name=".MyListMovie"/>
+        <activity android:name=".ProfileUser" />
+        <activity android:name=".MyListMovie" />
+        <activity android:name=".Load.MyMovieDetail" />
+        <activity android:name=".EditMovie"></activity>
     </application>
 
 </manifest>

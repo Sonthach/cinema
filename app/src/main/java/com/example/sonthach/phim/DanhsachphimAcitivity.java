@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -42,7 +43,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class DanhsachphimAcitivity extends AppCompatActivity {
+public class DanhsachphimAcitivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
     FloatingActionButton fab,ftuser;
     Toolbar toolbar;
     Context context;
@@ -50,9 +51,11 @@ public class DanhsachphimAcitivity extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     private List<Movie> movies = new ArrayList<>();
     private List<Movie> moviesFull = new ArrayList<>();
+    private Movie movie;
     private RecyclerAdapter adapter;
     private String TAG = MainActivity.class.getSimpleName();
     private APIService apiService;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     // 2 arraylist, 1 cai chinh de chua du lieu tra ve, cai con lai chua du lieu sau khi tim xong dung de hien thi
     @Override
@@ -65,6 +68,9 @@ public class DanhsachphimAcitivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Tìm Phim");
 
+        swipeRefreshLayout = findViewById(R.id.swip_refresh);
+        swipeRefreshLayout.setOnRefreshListener(this);
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
         ftuser = findViewById(R.id.ftuser);
         fab = findViewById(R.id.fttaophim);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
@@ -72,7 +78,8 @@ public class DanhsachphimAcitivity extends AppCompatActivity {
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerView.setLayoutManager(new GridLayoutManager(this,2));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        loadAgainListFilms();
+        onloadingSwipRefresh("");
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -106,13 +113,11 @@ public class DanhsachphimAcitivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        loadAgainListFilms();
+        loadAgainListFilms("");
     }
 
-    private void loadAgainListFilms(){
-        final ProgressDialog progressDialog = new ProgressDialog(DanhsachphimAcitivity.this);
-        progressDialog.setMessage("Đang tải dữ liệu...");
-        progressDialog.show();
+    private void loadAgainListFilms(String keyword){
+        swipeRefreshLayout.setRefreshing(true);
         APIService apiService;
         apiService = APIUtils.getAPIService();
         apiService.getAllMovie().enqueue(new Callback<Filmss>() {
@@ -123,35 +128,26 @@ public class DanhsachphimAcitivity extends AppCompatActivity {
                     adapter = new RecyclerAdapter(movies, DanhsachphimAcitivity.this);
                     recyclerView.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
-                    progressDialog.dismiss();
+                    swipeRefreshLayout.setRefreshing(false);
                 }
             }
 
             @Override
             public void onFailure(Call<Filmss> call, Throwable t) {
-
+                    swipeRefreshLayout.setRefreshing(false);
             }
         });
     }
+    @Override
+    public void onRefresh() {
+        loadAgainListFilms("");
+    }
 
-    private void loadDataa() {
-        apiService.getAllMovie().enqueue(new Callback<Filmss>() {
+    private void onloadingSwipRefresh(final String keyword){
+        swipeRefreshLayout.post(new Runnable() {
             @Override
-            public void onResponse(Call<Filmss> call, Response<Filmss> response) {
-
-                if (!movies.isEmpty()) {
-                    movies.clear();
-                }
-
-                movies = response.body().getMovie();
-                adapter = new RecyclerAdapter(movies, DanhsachphimAcitivity.this);
-                recyclerView.setAdapter(adapter);
-                adapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onFailure(Call<Filmss> call, Throwable t) {
-
+            public void run() {
+                loadAgainListFilms(keyword);
             }
         });
     }
@@ -162,11 +158,11 @@ public class DanhsachphimAcitivity extends AppCompatActivity {
         inflater.inflate(R.menu.menu_main,menu);
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         final SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
-        
+
         MenuItem searchMenuItem = menu.findItem(R.id.action_search);
 
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-        searchView.setQueryHint("Tìm Phim ...");
+        searchView.setQueryHint("...");
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
@@ -182,5 +178,7 @@ public class DanhsachphimAcitivity extends AppCompatActivity {
         searchMenuItem.getIcon().setVisible(false,false);
         return true;
     }
+
 }
+
 

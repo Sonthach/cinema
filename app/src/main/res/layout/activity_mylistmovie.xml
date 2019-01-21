@@ -11,7 +11,12 @@
         android:background="@color/colorPrimary"
         android:id="@+id/tbdanhsachphim"
         app:title="Danh sách phim của tôi"></android.support.v7.widget.Toolbar>
-
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swip_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        >
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,4 +24,5 @@
         android:layout_marginTop="20dp"
         >
     </android.support.v7.widget.RecyclerView>
+    </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>

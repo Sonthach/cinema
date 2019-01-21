@@ -89,4 +89,24 @@ public interface APIService {
     @FormUrlEncoded
     @POST("/api/auth/reset-password")
     Call<ErrorResponse> forgotPassword(@Field("email") String email);
+
+    @FormUrlEncoded
+    @POST("/api/cinema/delete")
+    Call<ErrorResponse> deleteMovie(@Header("x-access-token") String token,
+                                    @Field("_id") String id);
+
+    @Multipart
+    @POST ("/api/cinema/edit")
+    Call<ResponseBody> editMovie(
+            @Header("x-access-token") String token,
+            @PartMap() Map<String, RequestBody> partMap,
+            @Part MultipartBody.Part photo
+    );
+
+    @Multipart
+    @POST ("/api/cinema/edit")
+    Call<ResponseBody> editMovienoImg(
+            @Header("x-access-token") String token,
+            @PartMap() Map<String, RequestBody> partMap
+    );
 }

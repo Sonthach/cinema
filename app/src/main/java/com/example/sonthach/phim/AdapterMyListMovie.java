@@ -65,15 +65,14 @@ public class AdapterMyListMovie extends RecyclerView.Adapter<AdapterMyListMovie.
         String url = "https://cinema-hatin.herokuapp.com";
         AdapterMyListMovie.MyViewHolder holders = holder;
         Movie movie = moviesSearch.get(pos);
-        holder.txtTenphim.setText(movie.getName());
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(movie.getReleaseDate());
-        int year = calendar.get(Calendar.YEAR);
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        String dateString = formatter.format(new Date(movie.getReleaseDate()));
-        holder.txtNgayphathanh.setText(String.valueOf(year));
-        ImageLoader.getInstance().loadImage(context, url + movie.getPosterURL(), holder.poster, requestOptions);
-
+            holder.txtTenphim.setText(movie.getName());
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTimeInMillis(movie.getReleaseDate());
+            int year = calendar.get(Calendar.YEAR);
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+            String dateString = formatter.format(new Date(movie.getReleaseDate()));
+            holder.txtNgayphathanh.setText(String.valueOf(year));
+            ImageLoader.getInstance().loadImage(context, url + movie.getPosterURL(), holder.poster, requestOptions);
     }
 
     @Override
@@ -105,4 +104,19 @@ public class AdapterMyListMovie extends RecyclerView.Adapter<AdapterMyListMovie.
         }
     }
 
+    public void filterList(){
+        SharedPreferences pre = context.getSharedPreferences("SaveToken",MODE_PRIVATE);
+        SharedPreferences.Editor editor = pre.edit();
+        String getId = pre.getString("id","");
+        moviesSearch.clear();
+        for(Movie movie : movies)
+        {
+            if(movie.getCreatorId() != null){
+                if(movie.getCreatorId().equals(getId)) {
+                    moviesSearch.add(movie);
+                    notifyDataSetChanged();
+                }
+            }
+        }
+    }
 }

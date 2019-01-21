@@ -41,9 +41,21 @@ public class Cinema {
         @Expose
         private String posterURL;
 
+        @SerializedName("creatorId")
+        @Expose
+        private String creatorId;
+
         @SerializedName("user")
         @Expose
         private User users;
+
+        public String getCreatorId() {
+            return creatorId;
+        }
+
+        public void setCreatorId(String creatorId) {
+            this.creatorId = creatorId;
+        }
 
         public User getUsers() {
             return users;

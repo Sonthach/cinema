@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -31,31 +32,38 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MyListMovie extends AppCompatActivity {
+public class MyListMovie extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
     Toolbar toolbar;
     Context context;
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private List<Movie> movies = new ArrayList<>();
-    private RecyclerAdapter adapter;
+    private AdapterMyListMovie adapter;
     APIService apiService;
+    private SwipeRefreshLayout swipeRefreshLayout;
+    private Movie movie;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mylistmovie);
-        per();
 
+        per();
         toolbar = findViewById(R.id.tbdanhsachphim);
         actionBar();
 
+        swipeRefreshLayout = findViewById(R.id.swip_refresh);
+        swipeRefreshLayout.setOnRefreshListener(this);
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerviewdanhsachphim);
         LinearLayoutManager layoutManager = new LinearLayoutManager(MyListMovie.this);
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        recyclerView.setLayoutManager(new GridLayoutManager(this,3));
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        loadAgainListFilms();
+        onLoadingSwipRefresh("");
 
     }
+
     private void actionBar() {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -84,85 +92,50 @@ public class MyListMovie extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        loadAgainListFilms();
+        onLoadingSwipRefresh("");
     }
 
-    private void loadAgainListFilms(){
-        SharedPreferences pre = getSharedPreferences("SaveToken",MODE_PRIVATE);
+    private void loadAgainListFilms(String keyword) {
+        SharedPreferences pre = getSharedPreferences("SaveToken", MODE_PRIVATE);
         SharedPreferences.Editor editor = pre.edit();
-        final String getCreatorId = pre.getString("id","");
+        final String getCreatorId = pre.getString("id", "");
+        swipeRefreshLayout.setRefreshing(true);
 
-        final ProgressDialog progressDialog = new ProgressDialog(MyListMovie.this);
-        progressDialog.setMessage("Đang tải dữ liệu...");
-        progressDialog.show();
-        APIService apiService;
+        final APIService apiService;
         apiService = APIUtils.getAPIService();
         apiService.getAllMovie().enqueue(new Callback<Filmss>() {
             @Override
             public void onResponse(Call<Filmss> call, Response<Filmss> response) {
                 Filmss filmss = response.body();
-                if(response.isSuccessful()) {
+                    if (response.isSuccessful()) {
                         movies = response.body().getMovie();
-                        adapter = new RecyclerAdapter(movies, MyListMovie.this);
+                        adapter = new AdapterMyListMovie(movies, MyListMovie.this);
                         recyclerView.setAdapter(adapter);
                         adapter.notifyDataSetChanged();
-                        progressDialog.dismiss();
+                        adapter.filterList();
+                        swipeRefreshLayout.setRefreshing(false);
                 }
             }
 
             @Override
             public void onFailure(Call<Filmss> call, Throwable t) {
-
+                swipeRefreshLayout.setRefreshing(false);
             }
         });
     }
 
-    private void loadDataa() {
-        apiService.getAllMovie().enqueue(new Callback<Filmss>() {
+
+    @Override
+    public void onRefresh() {
+        loadAgainListFilms("");
+    }
+
+    private void onLoadingSwipRefresh(final String keyword) {
+        swipeRefreshLayout.post(new Runnable() {
             @Override
-            public void onResponse(Call<Filmss> call, Response<Filmss> response) {
-
-                if (!movies.isEmpty()) {
-                    movies.clear();
-                }
-
-                movies = response.body().getMovie();
-                adapter = new RecyclerAdapter(movies, MyListMovie.this);
-                recyclerView.setAdapter(adapter);
-                adapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onFailure(Call<Filmss> call, Throwable t) {
-
+            public void run() {
+                loadAgainListFilms(keyword);
             }
         });
     }
-
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_main,menu);
-        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        final SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
-
-        MenuItem searchMenuItem = menu.findItem(R.id.action_search);
-
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-        searchView.setQueryHint("Tìm Phim ...");
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String s) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                adapter.setFilter(newText);
-                return false;
-            }
-        });
-        searchMenuItem.getIcon().setVisible(false,false);
-        return true;
-    }*/
 }

@@ -7,6 +7,7 @@ public class User {
     @SerializedName("_id")
     @Expose
     private String _id;
+
     @SerializedName("email")
     @Expose
     private String email;

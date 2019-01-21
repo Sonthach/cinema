@@ -27,6 +27,7 @@ import android.widget.Toast;
 
 import com.example.sonthach.phim.Load.ErrorResponse;
 import com.example.sonthach.phim.Load.LoginRespone;
+import com.example.sonthach.phim.Load.Movie;
 import com.example.sonthach.phim.Load.User;
 import com.squareup.picasso.Picasso;
 
@@ -111,7 +112,9 @@ public class ProfileUser extends AppCompatActivity {
                         editor.clear();
                         editor.commit();
                         finish();
-                        startActivity(new Intent(ProfileUser.this,MainActivity.class));
+                        Intent intent = new Intent(ProfileUser.this,MainActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
                     }
                 });
                 builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
@@ -128,8 +131,8 @@ public class ProfileUser extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 final Dialog dialog = new Dialog(ProfileUser.this);
-                dialog.setTitle("Đổi mật khẩu");
-                dialog.setCancelable(false);
+                //dialog.setTitle("Đổi mật khẩu");
+                dialog.setCancelable(true);
                 dialog.setContentView(R.layout.dialog_change_password);
                 btnxacnhan = dialog.findViewById(R.id.btnxacnhandoimatkhau);
                 btnhuy = dialog.findViewById(R.id.btnhuy);
@@ -197,29 +200,29 @@ public class ProfileUser extends AppCompatActivity {
             public void onClick(View view) {
                 final Dialog dialog = new Dialog(ProfileUser.this);
                 dialog.setTitle("Đổi tên");
-                dialog.setCancelable(false);
+                dialog.setCancelable(true);
                 dialog.setContentView(R.layout.dialog_change_name);
                 btnxacnnhandoiten = dialog.findViewById(R.id.btnxacnhandoiten);
                 btnxacnhanhuyten = dialog.findViewById(R.id.btnhuyten);
                 final EditText edtTenmoi = dialog.findViewById(R.id.edtnewname);
-
+                edtTenmoi.setText(txtnameuser.getText().toString());
                 btnxacnnhandoiten.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         imgviewChangeName = edtTenmoi.getText().toString();
-
+                        edtTenmoi.setText(txtnameuser.getText().toString());
                         if(imgviewChangeName.length() == 0){
                             ThongBao.Toast(ProfileUser.this,"Vui lòng nhập Tên muốn đổi!");
                         }
                         SharedPreferences pre = getSharedPreferences("SaveToken",MODE_PRIVATE);
-                        SharedPreferences.Editor editor = pre.edit();
-                        String getToken = pre.getString("token","");
-
+                        final SharedPreferences.Editor editor = pre.edit();
+                        final String getToken = pre.getString("token","");
                         apiService = APIUtils.getAPIService();
                         apiService.changeName(getToken,imgviewChangeName).enqueue(new Callback<ErrorResponse>() {
                             @Override
                             public void onResponse(Call<ErrorResponse> call, Response<ErrorResponse> response) {
                                 ErrorResponse errorResponse = response.body();
+                                edtTenmoi.setText(txtnameuser.getText().toString());
                                 if(response.isSuccessful()){
                                     if(errorResponse.getStatus() == 200){
                                         ThongBao.Toast(ProfileUser.this,"Đổi tên thành công!!");

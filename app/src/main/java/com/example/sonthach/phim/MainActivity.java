@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 final Dialog dialog = new Dialog(MainActivity.this);
                 dialog.setTitle("Quên mật khẩu");
-                dialog.setCancelable(false);
+                dialog.setCancelable(true);
                 dialog.setContentView(R.layout.dialog_quenmatkhau);
                 btnxacnhan = dialog.findViewById(R.id.btnxacnhanquenmatkhau);
                 btnhuy = dialog.findViewById(R.id.btnhuyquenmatkhau);
