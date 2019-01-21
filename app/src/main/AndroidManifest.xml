@@ -33,7 +33,6 @@
         <activity android:name=".ProductDetails" />
         <activity android:name=".ProfileUser" />
         <activity android:name=".MyListMovie" />
-        <activity android:name=".Load.MyMovieDetail" />
         <activity android:name=".EditMovie"></activity>
     </application>
 

@@ -88,7 +88,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             super(itemView);
             poster = itemView.findViewById(R.id.ctposter);
             txtTenphim = itemView.findViewById(R.id.txttenphim);
-            txtTheloai = itemView.findViewById(R.id.txttheloai);
+            //txtTheloai = itemView.findViewById(R.id.txttheloai);
             txtNgayphathanh = itemView.findViewById(R.id.txtngayphathanh);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

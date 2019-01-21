@@ -184,7 +184,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void savePfe(){
+    /*private void savePfe(){
         String mEmail = edtEmail.getText().toString();
         String mPassword = edtPassword.getText().toString();
 
@@ -216,5 +216,5 @@ public class MainActivity extends AppCompatActivity {
                 ThongBao.Toast(MainActivity.this,t.getMessage());
             }
         });
-    }
+    }*/
 }

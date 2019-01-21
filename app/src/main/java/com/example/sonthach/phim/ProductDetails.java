@@ -210,16 +210,18 @@ public class ProductDetails extends AppCompatActivity {
 
         final String getId = pre.getString("id","");
 
-
-
         txtTenphim.setText("Tên Phim: "+mten);
         txtTheloai.setText("Thể loại: "+mtheloai);
         txtNguoitao.setText("Người tạo phim: "+mnguoitao);
         txtMota.setText("Mô tả: "+mmota);
         btnsua.setVisibility(View.GONE);
         btnxoa.setVisibility(View.GONE);
-        Picasso.with(getApplicationContext()).load(url+mhinhanh).placeholder(R.drawable.filmnon).
-                error(R.drawable.filmnon).into(poster);
+        Picasso.with(getApplicationContext())
+                .load(url+mhinhanh)
+                .placeholder(R.drawable.filmnon)
+                .error(R.drawable.filmnon)
+                .into(poster);
+
         apiService = APIUtils.getAPIService();
         apiService.productdetails(movieId).enqueue(new Callback<Cinema>() {
             @Override

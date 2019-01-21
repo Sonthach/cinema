@@ -61,7 +61,6 @@ public class MyListMovie extends AppCompatActivity implements SwipeRefreshLayout
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         onLoadingSwipRefresh("");
-
     }
 
     private void actionBar() {
