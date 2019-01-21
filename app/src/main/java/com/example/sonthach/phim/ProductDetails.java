@@ -76,6 +76,8 @@ public class ProductDetails extends AppCompatActivity {
         txtTheloai.setText("Thể loại: "+mtheloai);
         txtNguoitao.setText("Người tạo phim: "+mnguoitao);
         txtMota.setText("Mô tả: "+mmota);
+
+
         btnsua.setVisibility(View.GONE);
         btnxoa.setVisibility(View.GONE);
         Picasso.with(getApplicationContext()).load(url+mhinhanh).placeholder(R.drawable.filmnon).
@@ -90,10 +92,12 @@ public class ProductDetails extends AppCompatActivity {
                         btnsua.setVisibility(View.VISIBLE);
                         btnxoa.setVisibility(View.VISIBLE);
                     }
+
                     mten = cinema.getDetail().getName();
                     mngayphathanh = cinema.getDetail().getReleaseDate();
                     mmota = cinema.getDetail().getContent();
                     mtheloai = cinema.getDetail().getGenre();
+                    mhinhanh = cinema.getDetail().getPosterURL();
 
                     txtTenphim.setText("Tên phim: "+cinema.getDetail().getName());
                     txtTheloai.setText("Thể loại: "+cinema.getDetail().getGenre());
@@ -184,6 +188,7 @@ public class ProductDetails extends AppCompatActivity {
                 intent.putExtra("genre",mtheloai);
                 intent.putExtra("releaseDate",mngayphathanh);
                 intent.putExtra("content",mmota);
+                intent.putExtra("posterURL",mhinhanh);
                 startActivity(intent);
             }
         });

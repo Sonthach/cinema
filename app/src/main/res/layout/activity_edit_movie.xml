@@ -36,12 +36,13 @@
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:src="@drawable/filmnon"
-                    android:layout_marginTop="30dp"/>
+                    android:layout_marginTop="20dp"/>
 
                 <Button
                     android:id="@+id/btnChonAnh2"
                     android:layout_width="100dp"
                     android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
                     android:layout_gravity="center"
                     android:text="Chọn ảnh"
                     android:textColor="#fff"

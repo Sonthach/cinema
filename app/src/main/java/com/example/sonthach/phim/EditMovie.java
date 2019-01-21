@@ -12,6 +12,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.Icon;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Environment;
@@ -37,6 +38,7 @@ import android.support.v7.widget.Toolbar;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.sonthach.phim.Load.Filmss;
 import com.example.sonthach.phim.Load.Movie;
+import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -117,10 +119,19 @@ public class EditMovie extends AppCompatActivity {
         final String mGenre = getIntent().getExtras().getString("genre");
         final long mReleaseDate = getIntent().getExtras().getLong("releaseDate");
         final String mContent = getIntent().getExtras().getString("content");
+        final String mHinhanh = getIntent().getExtras().getString("posterURL");
 
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         String dateString = formatter.format(new Date(mReleaseDate));
 
+        String url = "https://cinema-hatin.herokuapp.com";
+
+        Picasso.with(getApplicationContext()).load(url+mHinhanh)
+                .placeholder(R.drawable.filmnon)
+                .fit()
+                .centerInside()
+                .error(R.drawable.filmnon)
+                .into(poster);
 
         Tenphim.setText(mTen);
         Mota.setText(mContent);
@@ -344,6 +355,7 @@ public class EditMovie extends AppCompatActivity {
 
             String getToken = pre.getString("token","");
             final String movieId = getIntent().getExtras().getString("id");
+
             RequestBody mName = RequestBody.create(MediaType.parse("text/plain"),Tenphim.getText().toString().trim());
             RequestBody mMota = RequestBody.create(MediaType.parse("text/plain"),Mota.getText().toString().trim());
             RequestBody mNgayphathanh = RequestBody.create(MediaType.parse("text/plain"),releaseDate);
