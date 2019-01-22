@@ -13,16 +13,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.support.v7.widget.Toolbar;
 
-import com.bumptech.glide.Glide;
 import com.example.sonthach.phim.Load.Cinema;
 import com.example.sonthach.phim.Load.ErrorResponse;
 import com.example.sonthach.phim.Load.Filmss;
-import com.example.sonthach.phim.Load.Movie;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -51,15 +48,7 @@ public class ProductDetails extends AppCompatActivity {
         setContentView(R.layout.activity_product_details);
 
 
-        toolbar = findViewById(R.id.tbchitietphim);
-        txtTenphim = findViewById(R.id.chitiet_tenphim);
-        txtTheloai = findViewById(R.id.chitiet_theloai);
-        txtNgayphathanh = findViewById(R.id.chitiet_ngayphathanh);
-        txtMota = findViewById(R.id.chitiet_mota);
-        poster = findViewById(R.id.poster_chitiet);
-        txtNguoitao = findViewById(R.id.chitiet_nguoitao);
-        btnsua = findViewById(R.id.btnsua);
-        btnxoa = findViewById(R.id.btnxoa);
+        Anhxa();
         actionBar();
         deleteMovie();
 
@@ -130,6 +119,18 @@ public class ProductDetails extends AppCompatActivity {
         });
     }
 
+    private void Anhxa() {
+        toolbar = findViewById(R.id.tbchitietphim);
+        txtTenphim = findViewById(R.id.chitiet_tenphim);
+        txtTheloai = findViewById(R.id.chitiet_theloai);
+        txtNgayphathanh = findViewById(R.id.chitiet_ngayphathanh);
+        txtMota = findViewById(R.id.chitiet_mota);
+        poster = findViewById(R.id.poster_chitiet);
+        txtNguoitao = findViewById(R.id.chitiet_nguoitao);
+        btnsua = findViewById(R.id.btnsua);
+        btnxoa = findViewById(R.id.btnxoa);
+    }
+
     private void deleteMovie(){
         btnxoa.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -152,11 +153,11 @@ public class ProductDetails extends AppCompatActivity {
                                 ErrorResponse errorResponse = response.body();
                                 if(response.isSuccessful()){
                                     if(errorResponse.getStatus() == 200 ) {
-                                        ThongBao.Toast(ProductDetails.this, "Xóa phim thành công!!");
+                                        ThongBaoActivity.Toast(ProductDetails.this, "Xóa phim thành công!!");
                                         finish();
                                     }
                                 } else {
-                                    ThongBao.Toast(ProductDetails.this,"Xóa phim thất bại! Vui lòng thử lại.");
+                                    ThongBaoActivity.Toast(ProductDetails.this,"Xóa phim thất bại! Vui lòng thử lại.");
                                 }
                             }
 
@@ -182,7 +183,7 @@ public class ProductDetails extends AppCompatActivity {
             public void onClick(View view) {
                 final String movieId = getIntent().getExtras().getString("id");
 
-                Intent intent = new Intent(ProductDetails.this,EditMovie.class);
+                Intent intent = new Intent(ProductDetails.this,EditMovieActivity.class);
                 intent.putExtra("id",movieId);
                 intent.putExtra("name",mten);
                 intent.putExtra("genre",mtheloai);

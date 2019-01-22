@@ -6,8 +6,10 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
 import java.io.File;
+import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Random;
 
 public class Common {
 
@@ -42,5 +44,13 @@ public class Common {
     public static String generateUniqueString() {
         String timeStamp = new SimpleDateFormat("ddMMyyyy_HHmmss").format(Calendar.getInstance().getTime());
         return timeStamp;
+    }
+
+    public String givenUsingPlainJava_whenGeneratingRandomStringUnbounded_thenCorrect() {
+        byte[] array = new byte[7]; // length is bounded by 7
+        new Random().nextBytes(array);
+        String generatedString = new String(array, Charset.forName("UTF-8"));
+        System.out.println(generatedString);
+        return generatedString;
     }
 }

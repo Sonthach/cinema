@@ -49,9 +49,13 @@ public class MyListMovie extends AppCompatActivity implements SwipeRefreshLayout
         setContentView(R.layout.activity_mylistmovie);
 
         per();
-        toolbar = findViewById(R.id.tbdanhsachphim);
         actionBar();
+        Anhxa();
+        onLoadingSwipRefresh("");
+    }
 
+    private void Anhxa() {
+        toolbar = findViewById(R.id.tbdanhsachphim);
         swipeRefreshLayout = findViewById(R.id.swip_refresh);
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
@@ -60,10 +64,6 @@ public class MyListMovie extends AppCompatActivity implements SwipeRefreshLayout
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        onLoadingSwipRefresh("");
-    }
-
-    private void actionBar() {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -72,6 +72,10 @@ public class MyListMovie extends AppCompatActivity implements SwipeRefreshLayout
                 finish();
             }
         });
+    }
+
+    private void actionBar() {
+
     }
 
     private void per() {

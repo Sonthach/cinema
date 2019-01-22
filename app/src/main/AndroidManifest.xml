@@ -28,12 +28,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".DanhsachphimAcitivity" />
-        <activity android:name=".TaoPhim" />
+        <activity android:name=".TaoPhimActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".ProductDetails" />
-        <activity android:name=".ProfileUser" />
+        <activity android:name=".ProfileUserActivity" />
         <activity android:name=".MyListMovie" />
-        <activity android:name=".EditMovie"></activity>
+        <activity android:name=".EditMovieActivity"></activity>
     </application>
 
 </manifest>

@@ -8,30 +8,16 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
-import com.example.sonthach.phim.Load.LoginRespone;
-import com.example.sonthach.phim.Load.Movie;
 import com.example.sonthach.phim.Load.SignupResponse;
 
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.HashMap;
-
-import okhttp3.MediaType;
-import okhttp3.RequestBody;
-import okhttp3.ResponseBody;
 import retrofit2.Callback;
 import retrofit2.Call;
 import retrofit2.Response;
-
-import static android.support.v4.app.ActivityCompat.requestPermissions;
-import static android.support.v4.content.PermissionChecker.checkSelfPermission;
 
 public class RegisterActivity extends AppCompatActivity {
     public static String Preference = "SaveToken";
@@ -65,14 +51,7 @@ public class RegisterActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
-        edtName = findViewById(R.id.txtregname);
-        edtEmail = findViewById(R.id.txtregemail);
-        edtPassword = findViewById(R.id.txtregpassword);
-        edtConfirm = findViewById(R.id.txtcomfirmpassword);
-        progressBar = findViewById(R.id.progress_bar);
-
-        Register = findViewById(R.id.buttonregister);
-        Login = findViewById(R.id.buttonlogin);
+        Anhxa();
 
 
         edtEmail.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
@@ -89,27 +68,27 @@ public class RegisterActivity extends AppCompatActivity {
 
                 if(mName.length() == 0)
                 {
-                    ThongBao.Toast(RegisterActivity.this,"Vui lòng nhập Tên");
+                    ThongBaoActivity.Toast(RegisterActivity.this,"Vui lòng nhập Tên");
                     progressBar.setVisibility(View.GONE);
                     Register.setVisibility(View.VISIBLE);
                 }
 
                 if(mEmail.length() == 0)
                 {
-                    ThongBao.Toast(RegisterActivity.this,"Vui lòng nhập Email");
+                    ThongBaoActivity.Toast(RegisterActivity.this,"Vui lòng nhập Email");
                     progressBar.setVisibility(View.GONE);
                     Register.setVisibility(View.VISIBLE);
                 }
 
                 if(mPassword.length() == 0)
                 {
-                    ThongBao.Toast(RegisterActivity.this,"Vui lòng nhập Mật khẩu");
+                    ThongBaoActivity.Toast(RegisterActivity.this,"Vui lòng nhập Mật khẩu");
                     progressBar.setVisibility(View.GONE);
                     Register.setVisibility(View.VISIBLE);
                 }
 
                 if(!edtConfirm.getText().toString().equals(mPassword)){
-                    ThongBao.Toast(RegisterActivity.this,"Mật khẩu xác nhận không đúng. Vui lòng nhập lại");
+                    ThongBaoActivity.Toast(RegisterActivity.this,"Mật khẩu xác nhận không đúng. Vui lòng nhập lại");
                     progressBar.setVisibility(View.GONE);
                     Register.setVisibility(View.VISIBLE);
                 }
@@ -124,7 +103,7 @@ public class RegisterActivity extends AppCompatActivity {
                         SignupResponse signupResponse = response.body();
                         if(response.isSuccessful())
                         {
-                            ThongBao.Toast(RegisterActivity.this,"Đăng ký thành công!");
+                            ThongBaoActivity.Toast(RegisterActivity.this,"Đăng ký thành công!");
                             progressBar.setVisibility(View.GONE);
                             Register.setVisibility(View.VISIBLE);
                             SharedPreferences pre =getSharedPreferences("SaveToken",MODE_PRIVATE);
@@ -144,7 +123,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<SignupResponse> call, Throwable t) {
-                        ThongBao.Toast(RegisterActivity.this,t.getMessage());
+                        ThongBaoActivity.Toast(RegisterActivity.this,t.getMessage());
                         progressBar.setVisibility(View.GONE);
                         Register.setVisibility(View.VISIBLE);
                     }
@@ -159,6 +138,18 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void Anhxa() {
+        edtName = findViewById(R.id.txtregname);
+        edtEmail = findViewById(R.id.txtregemail);
+        edtPassword = findViewById(R.id.txtregpassword);
+        edtConfirm = findViewById(R.id.txtcomfirmpassword);
+        progressBar = findViewById(R.id.progress_bar);
+
+        Register = findViewById(R.id.buttonregister);
+        Login = findViewById(R.id.buttonlogin);
+    }
+
     private void checkconnection(){
 
            /* if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {

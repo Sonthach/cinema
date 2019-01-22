@@ -1,7 +1,6 @@
 package com.example.sonthach.phim;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
@@ -34,9 +33,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v7.widget.Toolbar;
 
-import com.bumptech.glide.request.RequestOptions;
-import com.example.sonthach.phim.Load.Filmss;
-import com.example.sonthach.phim.Load.Movie;
+import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -47,11 +44,9 @@ import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -59,7 +54,7 @@ import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Callback;
 
-public class TaoPhim extends AppCompatActivity {
+public class EditMovieActivity extends AppCompatActivity {
 
     String IMAGE_PATH ="";
     Toolbar toolbar;
@@ -96,21 +91,36 @@ public class TaoPhim extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tao_phim);
 
-        toolbar = findViewById(R.id.tbtaophim);
-        Ngayphathanh = findViewById(R.id.edtNgayPhatHanh2);
-        Tenphim = findViewById(R.id.edtTenPhim);
-        Mota = findViewById(R.id.edtMoTa);
-        TaoPhim = findViewById(R.id.btnTaoPhim);
-        spin = findViewById(R.id.spinnerOption);
-        poster = findViewById(R.id.imgposter2);
-        ChupHinh = findViewById(R.id.btnChonAnh2);
-        processBuilder = findViewById(R.id.progress_bar_taophim);
+        setContentView(R.layout.activity_edit_movie);
+
+        Anhxa();
 
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         String defaultDate = df.format(Calendar.getInstance().getTime());
         Ngayphathanh.setText(defaultDate);
+
+        final String mTen = getIntent().getExtras().getString("name");
+        final String mGenre = getIntent().getExtras().getString("genre");
+        final long mReleaseDate = getIntent().getExtras().getLong("releaseDate");
+        final String mContent = getIntent().getExtras().getString("content");
+        final String mHinhanh = getIntent().getExtras().getString("posterURL");
+
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        String dateString = formatter.format(new Date(mReleaseDate));
+
+        String url = "https://cinema-hatin.herokuapp.com";
+
+        Picasso.with(getApplicationContext()).load(url+mHinhanh)
+                .placeholder(R.drawable.filmnon)
+                .fit()
+                .centerInside()
+                .error(R.drawable.filmnon)
+                .into(poster);
+
+        Tenphim.setText(mTen);
+        Mota.setText(mContent);
+        Ngayphathanh.setText(dateString);
 
         CreateSpin();
         actionBar();
@@ -126,7 +136,7 @@ public class TaoPhim extends AppCompatActivity {
         Ngayphathanh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatePickerDialog datePickerDialog = new DatePickerDialog(TaoPhim.this,dateSetListener,calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),
+                DatePickerDialog datePickerDialog = new DatePickerDialog(EditMovieActivity.this,dateSetListener,calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),
                         calendar.get(Calendar.DAY_OF_MONTH));
                 datePickerDialog.show();
             }
@@ -138,6 +148,18 @@ public class TaoPhim extends AppCompatActivity {
                 Request();
             }
         });
+    }
+
+    private void Anhxa() {
+        toolbar = findViewById(R.id.tbtaophim);
+        Ngayphathanh = findViewById(R.id.edtNgayPhatHanh2);
+        Tenphim = findViewById(R.id.edtTenPhim);
+        Mota = findViewById(R.id.edtMoTa);
+        TaoPhim = findViewById(R.id.btnTaoPhim);
+        spin = findViewById(R.id.spinnerOption);
+        poster = findViewById(R.id.imgposter2);
+        ChupHinh = findViewById(R.id.btnChonAnh2);
+        processBuilder = findViewById(R.id.progress_bar_taophim);
     }
 
     private void actionBar() {
@@ -181,18 +203,18 @@ public class TaoPhim extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,Arr);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         spin.setAdapter(adapter);
-       spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-           @Override
-           public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-               ((TextView) adapterView.getChildAt(0)).setTextColor(Color.BLACK);
-               spPosition = i;
-           }
+        spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                ((TextView) adapterView.getChildAt(0)).setTextColor(Color.BLACK);
+                spPosition = i;
+            }
 
-           @Override
-           public void onNothingSelected(AdapterView<?> adapterView) {
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
                 spPosition = -1;
-           }
-       });
+            }
+        });
     }
 
     private void SelectDialog() {
@@ -217,8 +239,8 @@ public class TaoPhim extends AppCompatActivity {
     }
     private void Permision(){
         if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED ) {
-        requestPermissions(new String[]{Manifest.permission.CAMERA},
-                MY_CAMERA_REQUEST_CODE);
+            requestPermissions(new String[]{Manifest.permission.CAMERA},
+                    MY_CAMERA_REQUEST_CODE);
 
         }
         if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
@@ -293,7 +315,7 @@ public class TaoPhim extends AppCompatActivity {
 
                 try {
                     Uri imageUri = data.getData();
-                    IMAGE_PATH = ReadPathUtils.getPath(TaoPhim.this, data.getData());
+                    IMAGE_PATH = ReadPathUtils.getPath(EditMovieActivity.this, data.getData());
                     Uri uri = Uri.fromFile(new File(IMAGE_PATH));
                     InputStream is = getContentResolver().openInputStream(imageUri);
                     Bitmap bitmap = BitmapFactory.decodeStream(is);
@@ -303,9 +325,9 @@ public class TaoPhim extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }else if(requestCode == REQUEST_TAKE_PHOTO) {
-                    Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-                    poster.setImageBitmap(bitmap);
-                    IMAGE_PATH = saveImage(bitmap,REQUEST_TAKE_PHOTO);
+                Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+                poster.setImageBitmap(bitmap);
+                IMAGE_PATH = saveImage(bitmap,REQUEST_TAKE_PHOTO);
             }
         }
     }
@@ -328,47 +350,57 @@ public class TaoPhim extends AppCompatActivity {
             SharedPreferences.Editor editor = pre.edit();
             String getCreatorId = pre.getString("id","");
 
+            String getToken = pre.getString("token","");
+            final String movieId = getIntent().getExtras().getString("id");
+
             RequestBody mName = RequestBody.create(MediaType.parse("text/plain"),Tenphim.getText().toString().trim());
             RequestBody mMota = RequestBody.create(MediaType.parse("text/plain"),Mota.getText().toString().trim());
             RequestBody mNgayphathanh = RequestBody.create(MediaType.parse("text/plain"),releaseDate);
             RequestBody mTheloai = RequestBody.create(MediaType.parse("text/plain"),spin.getSelectedItem().toString());
             RequestBody mCreatorId = RequestBody.create(MediaType.parse("text/plain"),getCreatorId);
+            RequestBody mId = RequestBody.create(MediaType.parse("text/plain"),movieId);
             RequestBody requestFile = RequestBody.create(MediaType.parse("image/*"), file);
             MultipartBody.Part body =
                     MultipartBody.Part.createFormData("file", file.getName(), requestFile);
 
             if(Tenphim.getText().toString().length() == 0){
-                ThongBao.Toast(TaoPhim.this,"Vui lòng nhập Tên phim!");
+                ThongBaoActivity.Toast(EditMovieActivity.this,"Vui lòng nhập Tên phim!");
             }
             if(Mota.getText().toString().length() == 0){
-                ThongBao.Toast(TaoPhim.this,"Vui lòng nhập Mô tả phim!");
+                ThongBaoActivity.Toast(EditMovieActivity.this,"Vui lòng nhập Mô tả phim!");
             }
             if(Ngayphathanh.getText().toString().length() == 0){
-                ThongBao.Toast(TaoPhim.this,"Vui lòng chọn Ngày phát hành phim!");
+                ThongBaoActivity.Toast(EditMovieActivity.this,"Vui lòng chọn Ngày phát hành phim!");
             }
+
+
 
             HashMap<String, RequestBody> map = new HashMap<>();
             map.put("name",mName);
             map.put("genre",mTheloai);
             map.put("releaseDate",mNgayphathanh);
             map.put("creatorId",mCreatorId);
+            map.put("id",mId);
             map.put("content",mMota);
 
             processBuilder.setVisibility(View.VISIBLE);
             TaoPhim.setVisibility(View.GONE);
 
             apiService = APIUtils.getAPIService();
-            apiService.postFilm(map,body).enqueue(new Callback<ResponseBody>() {
+            apiService.editMovie(getToken,map,body).enqueue(new Callback<ResponseBody>() {
                 @Override
                 public void onResponse(retrofit2.Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
+                    /*Tenphim.setText(mTen);
+                    Mota.setText(mContent);
+                    Ngayphathanh.setText(mReleaseDate);*/
                     if(response.isSuccessful())
                     {
-                        ThongBao.Toast(TaoPhim.this,"Đăng phim thành công!");
+                        ThongBaoActivity.Toast(EditMovieActivity.this,"Sửa phim thành công!");
                         finish();
                         processBuilder.setVisibility(View.GONE);
                         TaoPhim.setVisibility(View.VISIBLE);
                     }else {
-                        ThongBao.Toast(TaoPhim.this,"Có lỗi xảy ra! Vui lòng thử lại.");
+                        ThongBaoActivity.Toast(EditMovieActivity.this,"Có lỗi xảy ra! Vui lòng thử lại.");
                         processBuilder.setVisibility(View.GONE);
                         TaoPhim.setVisibility(View.VISIBLE);
                     }
@@ -376,29 +408,34 @@ public class TaoPhim extends AppCompatActivity {
 
                 @Override
                 public void onFailure(retrofit2.Call<ResponseBody> call, Throwable t) {
-                    ThongBao.Toast(TaoPhim.this,t.getMessage());
+                    ThongBaoActivity.Toast(EditMovieActivity.this,t.getMessage());
                 }
             });
         }else {
             SharedPreferences pre = getSharedPreferences("SaveToken",MODE_PRIVATE);
             SharedPreferences.Editor editor = pre.edit();
             String getCreatorId = pre.getString("id","");
+            String getToken = pre.getString("token","");
+
+            final String movieId = getIntent().getExtras().getString("id");
+
             RequestBody mName = RequestBody.create(MediaType.parse("text/plain"),Tenphim.getText().toString().trim());
             RequestBody mMota = RequestBody.create(MediaType.parse("text/plain"),Mota.getText().toString().trim());
             RequestBody mNgayphathanh = RequestBody.create(MediaType.parse("text/plain"),releaseDate);
             RequestBody mTheloai = RequestBody.create(MediaType.parse("text/plain"),spin.getSelectedItem().toString());
             RequestBody mCreatorId = RequestBody.create(MediaType.parse("text/plain"),getCreatorId);
+            RequestBody mId = RequestBody.create(MediaType.parse("text/plain"),movieId);
 
             //RequestBody requestFile = RequestBody.create(MediaType.parse("image/*"), file);
 
             if(Tenphim.getText().toString().length() == 0){
-                ThongBao.Toast(TaoPhim.this,"Vui lòng nhập Tên phim!");
+                ThongBaoActivity.Toast(EditMovieActivity.this,"Vui lòng nhập Tên phim!");
             }
             if(Mota.getText().toString().length() == 0){
-                ThongBao.Toast(TaoPhim.this,"Vui lòng nhập Mô tả phim!");
+                ThongBaoActivity.Toast(EditMovieActivity.this,"Vui lòng nhập Mô tả phim!");
             }
             if(Ngayphathanh.getText().toString().length() == 0){
-                ThongBao.Toast(TaoPhim.this,"Vui lòng chọn Ngày phát hành phim!");
+                ThongBaoActivity.Toast(EditMovieActivity.this,"Vui lòng chọn Ngày phát hành phim!");
             }
 
             HashMap<String, RequestBody> map = new HashMap<>();
@@ -406,22 +443,23 @@ public class TaoPhim extends AppCompatActivity {
             map.put("genre",mTheloai);
             map.put("releaseDate",mNgayphathanh);
             map.put("creatorId",mCreatorId);
+            map.put("id",mId);
             map.put("content",mMota);
             processBuilder.setVisibility(View.VISIBLE);
             TaoPhim.setVisibility(View.GONE);
 
             apiService = APIUtils.getAPIService();
-            apiService.postfilmnoimage(map).enqueue(new Callback<ResponseBody>() {
+            apiService.editMovienoImg(getToken,map).enqueue(new Callback<ResponseBody>() {
                 @Override
                 public void onResponse(retrofit2.Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
                     if(response.isSuccessful())
                     {
-                        ThongBao.Toast(TaoPhim.this,"Đăng phim thành công!");
+                        ThongBaoActivity.Toast(EditMovieActivity.this,"Sửa phim thành công!");
                         finish();
                         processBuilder.setVisibility(View.GONE);
                         TaoPhim.setVisibility(View.VISIBLE);
                     }else {
-                        ThongBao.Toast(TaoPhim.this,"Có lỗi xảy ra! Vui lòng thử lại.");
+                        ThongBaoActivity.Toast(EditMovieActivity.this,"Có lỗi xảy ra! Vui lòng thử lại.");
                         processBuilder.setVisibility(View.GONE);
                         TaoPhim.setVisibility(View.VISIBLE);
                     }
@@ -429,10 +467,11 @@ public class TaoPhim extends AppCompatActivity {
 
                 @Override
                 public void onFailure(retrofit2.Call<ResponseBody> call, Throwable t) {
-                    ThongBao.Toast(TaoPhim.this,t.getMessage());
+                    ThongBaoActivity.Toast(EditMovieActivity.this,t.getMessage());
                 }
             });
         }
 
     }
 }
+

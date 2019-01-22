@@ -1,14 +1,9 @@
 package com.example.sonthach.phim;
 
 import android.Manifest;
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.app.SearchManager;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -22,20 +17,14 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Adapter;
-import android.widget.ListView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 
-import com.bumptech.glide.annotation.GlideModule;
 import com.example.sonthach.phim.Load.Filmss;
 import com.example.sonthach.phim.Load.Movie;
-import com.example.sonthach.phim.Load.User;
 
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.DuplicateFormatFlagsException;
 import java.util.List;
 
 import retrofit2.Call;
@@ -52,7 +41,7 @@ public class DanhsachphimAcitivity extends AppCompatActivity implements SwipeRef
     private List<Movie> movies = new ArrayList<>();
     private List<Movie> moviesFull = new ArrayList<>();
     private Movie movie;
-    private RecyclerAdapter adapter;
+    private AdapterListMovie adapter;
     private String TAG = MainActivity.class.getSimpleName();
     private APIService apiService;
     private SwipeRefreshLayout swipeRefreshLayout;
@@ -62,8 +51,27 @@ public class DanhsachphimAcitivity extends AppCompatActivity implements SwipeRef
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_danhsachphim);
-        per();
 
+        per();
+        Anhxa();
+        onloadingSwipRefresh("");
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(DanhsachphimAcitivity.this,TaoPhimActivity.class));
+            }
+        });
+
+        ftuser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(DanhsachphimAcitivity.this,ProfileUserActivity.class));
+            }
+        });
+    }
+
+    private void Anhxa() {
         toolbar = findViewById(R.id.tbdanhsachphim);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Tìm Phim");
@@ -78,21 +86,6 @@ public class DanhsachphimAcitivity extends AppCompatActivity implements SwipeRef
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerView.setLayoutManager(new GridLayoutManager(this,2));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        onloadingSwipRefresh("");
-
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(DanhsachphimAcitivity.this,TaoPhim.class));
-            }
-        });
-
-        ftuser.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(DanhsachphimAcitivity.this,ProfileUser.class));
-            }
-        });
     }
 
 
@@ -125,7 +118,7 @@ public class DanhsachphimAcitivity extends AppCompatActivity implements SwipeRef
             public void onResponse(Call<Filmss> call, Response<Filmss> response) {
                 if(response.isSuccessful()) {
                     movies = response.body().getMovie();
-                    adapter = new RecyclerAdapter(movies, DanhsachphimAcitivity.this);
+                    adapter = new AdapterListMovie(movies, DanhsachphimAcitivity.this);
                     recyclerView.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
                     swipeRefreshLayout.setRefreshing(false);

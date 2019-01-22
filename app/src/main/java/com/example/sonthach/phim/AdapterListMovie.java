@@ -2,44 +2,32 @@ package com.example.sonthach.phim;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.annotation.GlideModule;
+
 import com.bumptech.glide.request.RequestOptions;
-import com.example.sonthach.phim.Load.Cinema;
-import com.example.sonthach.phim.Load.Filmss;
 import com.example.sonthach.phim.Load.ImageLoader;
 import com.example.sonthach.phim.Load.Movie;
 
-import java.io.Serializable;
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
-import com.bumptech.glide.annotation.GlideModule;
-import com.bumptech.glide.module.AppGlideModule;
 
 
-public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyViewHolder>{
+public class AdapterListMovie extends RecyclerView.Adapter<AdapterListMovie.MyViewHolder>{
     List<Movie> movies;
     List<Movie> moviesSearch = new ArrayList<>();// List dùng để Search
     final Context context;
 
 
-    public RecyclerAdapter(List<Movie> movie,Context context) {
+    public AdapterListMovie(List<Movie> movie, Context context) {
         this.movies = movie;
         this.moviesSearch.addAll(movies);
         this.context = context;
@@ -47,7 +35,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.test_ui_danhsachphim,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.custome_dong_recyclerview,parent,false);
         return new MyViewHolder(view);
     }
 

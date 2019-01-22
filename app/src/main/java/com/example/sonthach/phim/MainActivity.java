@@ -5,17 +5,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.sonthach.phim.Load.ErrorResponse;
 import com.example.sonthach.phim.Load.LoginRespone;
-import com.example.sonthach.phim.Load.User;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -44,12 +41,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
-        progressBar = findViewById(R.id.idproressbar);
-        edtEmail = findViewById(R.id.txtloginemail);
-        edtPassword = findViewById(R.id.txtloginpassword);
-        btRegister = findViewById(R.id.buttonreg);
-        txtQuenmatkhau = findViewById(R.id.txtquenmatkhau);
-        btLogin = findViewById(R.id.buttonlogin);
+        Anhxa();
 
 
         txtQuenmatkhau.setOnClickListener(new View.OnClickListener() {
@@ -70,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
                         if (mPassword.length() == 0)
                         {
-                            ThongBao.Toast(MainActivity.this,"Vui lòng nhập Email!");
+                            ThongBaoActivity.Toast(MainActivity.this,"Vui lòng nhập Email!");
                             return;
                         }
                         apiService = APIUtils.getAPIService();
@@ -80,11 +72,11 @@ public class MainActivity extends AppCompatActivity {
                                 ErrorResponse errorResponse = response.body();
                                 if (response.isSuccessful()) {
                                     if (errorResponse.getStatus() == 200) {
-                                        ThongBao.Toast(MainActivity.this, "Yêu cầu thay đổi " +
+                                        ThongBaoActivity.Toast(MainActivity.this, "Yêu cầu thay đổi " +
                                                 "mật khẩu thành công. Vui lòng kiểm tra email ");
                                         dialog.cancel();
                                     } else {
-                                        ThongBao.Toast(MainActivity.this, "Yêu cầu thay đổi " +
+                                        ThongBaoActivity.Toast(MainActivity.this, "Yêu cầu thay đổi " +
                                                 "mật khẩu thất bại!Vui lòng thử lại. ");
                                         dialog.cancel();
                                     }
@@ -93,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
 
                             @Override
                             public void onFailure(Call<ErrorResponse> call, Throwable t) {
-                                ThongBao.Toast(MainActivity.this, "Yêu cầu thay đổi " +
+                                ThongBaoActivity.Toast(MainActivity.this, "Yêu cầu thay đổi " +
                                         "mật khẩu thất bại!Vui lòng thử lại. ");
                                 dialog.cancel();
                             }
@@ -127,6 +119,15 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void Anhxa() {
+        progressBar = findViewById(R.id.idproressbar);
+        edtEmail = findViewById(R.id.txtloginemail);
+        edtPassword = findViewById(R.id.txtloginpassword);
+        btRegister = findViewById(R.id.buttonreg);
+        txtQuenmatkhau = findViewById(R.id.txtquenmatkhau);
+        btLogin = findViewById(R.id.buttonlogin);
+    }
+
     public void login(){
         progressBar.setVisibility(View.VISIBLE);
         btLogin.setVisibility(View.GONE);
@@ -135,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
 
         if(mEmail.length() == 0 || mPassword.length() == 0)
         {
-            ThongBao.Toast(MainActivity.this,"Vui lòng nhập đủ thông tin!");
+            ThongBaoActivity.Toast(MainActivity.this,"Vui lòng nhập đủ thông tin!");
             progressBar.setVisibility(View.GONE);
             btLogin.setVisibility(View.VISIBLE);
         }
@@ -146,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<LoginRespone> call, Response<LoginRespone> response) {
                 LoginRespone loginRespone = response.body();
                 if(response.isSuccessful()) {
-                    ThongBao.Toast(MainActivity.this,"Đăng nhập thành công!!");
+                    ThongBaoActivity.Toast(MainActivity.this,"Đăng nhập thành công!!");
                     SharedPreferences pre = getSharedPreferences("SaveToken",MODE_PRIVATE);
                     SharedPreferences.Editor editor = pre.edit();
                     editor.clear();
@@ -163,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                 }else {
-                    ThongBao.Toast(MainActivity.this,"Sai Email hoặc Mật khẩu");
+                    ThongBaoActivity.Toast(MainActivity.this,"Sai Email hoặc Mật khẩu");
                     progressBar.setVisibility(View.GONE);
                     btLogin.setVisibility(View.VISIBLE);
                 }
@@ -171,7 +172,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<LoginRespone> call, Throwable t) {
-                ThongBao.Toast(MainActivity.this,t.getMessage());
+                ThongBaoActivity.Toast(MainActivity.this,t.getMessage());
             }
         });
     }
@@ -194,7 +195,7 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<LoginRespone> call, Response<LoginRespone> response) {
                 LoginRespone loginRespone = response.body();
                 if(response.isSuccessful()) {
-                    ThongBao.Toast(MainActivity.this,"Đăng nhập thành công!!");
+                    ThongBaoActivity.Toast(MainActivity.this,"Đăng nhập thành công!!");
                     SharedPreferences pre = getSharedPreferences("SaveToken",MODE_PRIVATE);
                     SharedPreferences.Editor editor = pre.edit();
                     editor.clear();
@@ -207,13 +208,13 @@ public class MainActivity extends AppCompatActivity {
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                 }else {
-                    ThongBao.Toast(MainActivity.this,"Sai Email hoặc Mật khẩu");
+                    ThongBaoActivity.Toast(MainActivity.this,"Sai Email hoặc Mật khẩu");
                 }
             }
 
             @Override
             public void onFailure(Call<LoginRespone> call, Throwable t) {
-                ThongBao.Toast(MainActivity.this,t.getMessage());
+                ThongBaoActivity.Toast(MainActivity.this,t.getMessage());
             }
         });
     }*/

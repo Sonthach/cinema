@@ -3,36 +3,23 @@ package com.example.sonthach.phim;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filter;
-import android.widget.Filterable;
-import android.content.SharedPreferences;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.annotation.GlideModule;
+
 import com.bumptech.glide.request.RequestOptions;
-import com.example.sonthach.phim.Load.Cinema;
-import com.example.sonthach.phim.Load.Filmss;
 import com.example.sonthach.phim.Load.ImageLoader;
 import com.example.sonthach.phim.Load.Movie;
 
-import java.io.Serializable;
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
-import com.bumptech.glide.annotation.GlideModule;
-import com.bumptech.glide.module.AppGlideModule;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -52,7 +39,7 @@ public class AdapterMyListMovie extends RecyclerView.Adapter<AdapterMyListMovie.
 
     @Override
     public AdapterMyListMovie.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.test_ui_danhsachphim, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.custome_dong_recyclerview, parent, false);
         return new AdapterMyListMovie.MyViewHolder(view);
     }
 

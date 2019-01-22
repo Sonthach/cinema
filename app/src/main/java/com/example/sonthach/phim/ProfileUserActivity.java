@@ -26,8 +26,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sonthach.phim.Load.ErrorResponse;
-import com.example.sonthach.phim.Load.LoginRespone;
-import com.example.sonthach.phim.Load.Movie;
 import com.example.sonthach.phim.Load.User;
 import com.squareup.picasso.Picasso;
 
@@ -37,9 +35,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -48,7 +44,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ProfileUser extends AppCompatActivity {
+public class ProfileUserActivity extends AppCompatActivity {
     Button btndangxuat,btnxacnhan,btnhuy,btnxacnnhandoiten,btnxacnhanhuyten;
     TextView txtdoimatkhau,txtnameuser,txtemailuser,txtdanhsachphim;
     Toolbar toolbar;
@@ -67,19 +63,12 @@ public class ProfileUser extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_user);
 
-        btndangxuat = findViewById(R.id.btndangxuat);
-        toolbar = findViewById(R.id.tbuser);
-        txtnameuser = findViewById(R.id.txtnameuser);
-        txtemailuser = findViewById(R.id.txtemailuser);
-        imageViewchangeName = findViewById(R.id.imgchangename);
-        txtdoimatkhau = findViewById(R.id.txtdoimatkhau);
-        imgchangeavatar = findViewById(R.id.imgposter);
-        txtdanhsachphim = findViewById(R.id.txxdanhsachphim);
+        Anhxa();
 
         txtdanhsachphim.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ProfileUser.this,MyListMovie.class);
+                Intent intent = new Intent(ProfileUserActivity.this,MyListMovie.class);
                 startActivity(intent);
             }
         });
@@ -100,7 +89,7 @@ public class ProfileUser extends AppCompatActivity {
         btndangxuat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(ProfileUser.this, android.R.style.Theme_DeviceDefault_Light_Dialog);
+                AlertDialog.Builder builder = new AlertDialog.Builder(ProfileUserActivity.this, android.R.style.Theme_DeviceDefault_Light_Dialog);
                 builder.setTitle("Bạn có chắn chắn muốn đăng xuất ?");
                 builder.setMessage("Hãy lựa chọn bên dưới để xác nhận !");
                 builder.setIcon(android.R.drawable.ic_dialog_alert);
@@ -112,7 +101,7 @@ public class ProfileUser extends AppCompatActivity {
                         editor.clear();
                         editor.commit();
                         finish();
-                        Intent intent = new Intent(ProfileUser.this,MainActivity.class);
+                        Intent intent = new Intent(ProfileUserActivity.this,MainActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                     }
@@ -130,7 +119,7 @@ public class ProfileUser extends AppCompatActivity {
         txtdoimatkhau.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final Dialog dialog = new Dialog(ProfileUser.this);
+                final Dialog dialog = new Dialog(ProfileUserActivity.this);
                 //dialog.setTitle("Đổi mật khẩu");
                 dialog.setCancelable(true);
                 dialog.setContentView(R.layout.dialog_change_password);
@@ -148,12 +137,12 @@ public class ProfileUser extends AppCompatActivity {
 
                         if(moldPassword.length() == 0)
                         {
-                            ThongBao.Toast(ProfileUser.this,"Vui lòng nhập mật khẩu cũ");
+                            ThongBaoActivity.Toast(ProfileUserActivity.this,"Vui lòng nhập mật khẩu cũ");
                             return;
                         }
 
                         if (!mnewPassword.equals(mCofirmpassword)){
-                            ThongBao.Toast(ProfileUser.this,"Xác nhận mật khẩu mới không đúng");
+                            ThongBaoActivity.Toast(ProfileUserActivity.this,"Xác nhận mật khẩu mới không đúng");
                             return;
                         }
 
@@ -167,9 +156,9 @@ public class ProfileUser extends AppCompatActivity {
                                 ErrorResponse errorResponse = response.body();
                                 if(response.isSuccessful()){
                                     if(errorResponse.getStatus() == 200){
-                                        ThongBao.Toast(ProfileUser.this,"Đổi mật khẩu thành công!!");
+                                        ThongBaoActivity.Toast(ProfileUserActivity.this,"Đổi mật khẩu thành công!!");
                                     }else if(errorResponse.getErrorMessage().getStatus() == 400){
-                                        ThongBao.Toast(ProfileUser.this,"Mật khẩu cũ không đúng!");
+                                        ThongBaoActivity.Toast(ProfileUserActivity.this,"Mật khẩu cũ không đúng!");
                                     }
                                 }
                                 dialog.cancel();
@@ -177,7 +166,7 @@ public class ProfileUser extends AppCompatActivity {
 
                             @Override
                             public void onFailure(Call<ErrorResponse> call, Throwable t) {
-                                ThongBao.Toast(ProfileUser.this,"Đổi mật khẩu thất bại !");
+                                ThongBaoActivity.Toast(ProfileUserActivity.this,"Đổi mật khẩu thất bại !");
                             }
                         });
 
@@ -198,7 +187,7 @@ public class ProfileUser extends AppCompatActivity {
         txtnameuser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final Dialog dialog = new Dialog(ProfileUser.this);
+                final Dialog dialog = new Dialog(ProfileUserActivity.this);
                 dialog.setTitle("Đổi tên");
                 dialog.setCancelable(true);
                 dialog.setContentView(R.layout.dialog_change_name);
@@ -212,7 +201,7 @@ public class ProfileUser extends AppCompatActivity {
                         imgviewChangeName = edtTenmoi.getText().toString();
                         edtTenmoi.setText(txtnameuser.getText().toString());
                         if(imgviewChangeName.length() == 0){
-                            ThongBao.Toast(ProfileUser.this,"Vui lòng nhập Tên muốn đổi!");
+                            ThongBaoActivity.Toast(ProfileUserActivity.this,"Vui lòng nhập Tên muốn đổi!");
                         }
                         SharedPreferences pre = getSharedPreferences("SaveToken",MODE_PRIVATE);
                         final SharedPreferences.Editor editor = pre.edit();
@@ -225,7 +214,7 @@ public class ProfileUser extends AppCompatActivity {
                                 edtTenmoi.setText(txtnameuser.getText().toString());
                                 if(response.isSuccessful()){
                                     if(errorResponse.getStatus() == 200){
-                                        ThongBao.Toast(ProfileUser.this,"Đổi tên thành công!!");
+                                        ThongBaoActivity.Toast(ProfileUserActivity.this,"Đổi tên thành công!!");
                                         txtnameuser.setText(imgviewChangeName);
                                     }
                                 }
@@ -250,6 +239,17 @@ public class ProfileUser extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void Anhxa() {
+        btndangxuat = findViewById(R.id.btndangxuat);
+        toolbar = findViewById(R.id.tbuser);
+        txtnameuser = findViewById(R.id.txtnameuser);
+        txtemailuser = findViewById(R.id.txtemailuser);
+        imageViewchangeName = findViewById(R.id.imgchangename);
+        txtdoimatkhau = findViewById(R.id.txtdoimatkhau);
+        imgchangeavatar = findViewById(R.id.imgposter);
+        txtdanhsachphim = findViewById(R.id.txxdanhsachphim);
     }
 
     private void Permision() {
@@ -387,7 +387,7 @@ public class ProfileUser extends AppCompatActivity {
 
                 try {
                     Uri imageUri = data.getData();
-                    IMAGE_PATH = ReadPathUtils.getPath(ProfileUser.this, data.getData());
+                    IMAGE_PATH = ReadPathUtils.getPath(ProfileUserActivity.this, data.getData());
                     Uri uri = Uri.fromFile(new File(IMAGE_PATH));
                     InputStream is = getContentResolver().openInputStream(imageUri);
                     Bitmap bitmap = BitmapFactory.decodeStream(is);
@@ -421,7 +421,7 @@ public class ProfileUser extends AppCompatActivity {
                 ErrorResponse errorResponse = response.body();
                 if(response.isSuccessful()){
                     if(errorResponse.getStatus() == 200){
-                        ThongBao.Toast(ProfileUser.this,"Đổi Avatar thành công!!");
+                        ThongBaoActivity.Toast(ProfileUserActivity.this,"Đổi Avatar thành công!!");
                     }
                 }
             }
