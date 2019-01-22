@@ -42,4 +42,6 @@ public class UserProfileActivity extends PageBase {
 
         TestReport.testReport(appiumDriver,true,"Click Có thì go to SignIn Capture",true);
     }
+
+
 }

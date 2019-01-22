@@ -4,26 +4,10 @@
     <list default="true" id="c1ad59d8-c899-420f-a0fa-b2bb66ab97f2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/report/AutomationTestReport.html" beforeDir="false" afterPath="$PROJECT_DIR$/report/AutomationTestReport.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/test/SignUpTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/test/SignUpTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ultis/Common.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ultis/Common.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/test/SignUpTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/test/SignUpTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/ultis/Common.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/ultis/Common.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/example/sonthach/phim/AdapterMyListMovie.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/example/sonthach/phim/AdapterMyListMovie.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/example/sonthach/phim/DanhsachphimAcitivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/example/sonthach/phim/DanhsachphimAcitivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/example/sonthach/phim/EditMovie.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/example/sonthach/phim/EditMovieActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/example/sonthach/phim/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/example/sonthach/phim/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/example/sonthach/phim/MyListMovie.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/example/sonthach/phim/MyListMovie.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/example/sonthach/phim/ProductDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/example/sonthach/phim/ProductDetails.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/example/sonthach/phim/ProfileUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/example/sonthach/phim/ProfileUserActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/example/sonthach/phim/RecyclerAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/example/sonthach/phim/AdapterListMovie.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/example/sonthach/phim/RegisterActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/example/sonthach/phim/RegisterActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/example/sonthach/phim/TaoPhim.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/example/sonthach/phim/TaoPhimActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/example/sonthach/phim/ThongBao.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/example/sonthach/phim/ThongBaoActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/activity_edit_movie.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/activity_edit_movie.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/activity_profile_user.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/activity_profile_user.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/activity_tao_phim.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/activity_tao_phim.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/test_ui_danhsachphim.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/custome_dong_recyclerview.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smoke.xml" beforeDir="false" afterPath="$PROJECT_DIR$/smoke.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/page/DanhsachphimActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/page/DanhsachphimActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/page/UserProfileActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/page/UserProfileActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/page/DanhsachphimActivity.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/page/DanhsachphimActivity.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -38,38 +22,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/test/SignUpTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="167">
-              <caret line="26" selection-start-line="26" selection-end-line="26" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/test/Retry.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/ultis/Common.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="265">
-              <caret line="48" column="85" selection-start-line="48" selection-start-column="18" selection-end-line="48" selection-end-column="85" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/page/SignInActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="333">
-              <caret line="35" column="15" selection-start-line="35" selection-start-column="15" selection-end-line="35" selection-end-column="15" />
+            <state relative-caret-position="374">
+              <caret line="34" column="13" lean-forward="true" selection-start-line="16" selection-start-column="12" selection-end-line="34" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -78,10 +32,19 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/test/java/page/DanhsachphimActivity.java">
+        <entry file="file://$PROJECT_DIR$/smoke.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="333">
-              <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
+            <state relative-caret-position="204">
+              <caret line="12" column="48" selection-start-line="12" selection-start-column="48" selection-end-line="12" selection-end-column="48" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/test/ProfileUserTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="425">
+              <caret line="30" column="9" selection-start-line="30" selection-start-column="9" selection-end-line="30" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -92,8 +55,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/page/UserProfileActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="82">
-              <caret line="20" column="37" selection-start-line="20" selection-start-column="19" selection-end-line="20" selection-end-column="37" />
+            <state relative-caret-position="333">
+              <caret line="43" column="5" lean-forward="true" selection-start-line="43" selection-start-column="5" selection-end-line="43" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -102,10 +65,13 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/page/PageBase.java">
+        <entry file="file://$PROJECT_DIR$/src/test/java/page/DanhsachphimActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="36" selection-start-line="36" selection-end-line="36" />
+            <state relative-caret-position="295">
+              <caret line="54" column="26" selection-start-line="54" selection-start-column="26" selection-end-line="54" selection-end-column="26" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -113,8 +79,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/page/SignUpActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="350">
-              <caret line="34" selection-start-line="34" selection-end-line="34" />
+            <state relative-caret-position="-24">
+              <caret line="24" selection-start-line="22" selection-start-column="5" selection-end-line="24" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -123,13 +89,51 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/report/22012019_093417.png">
-          <provider selected="true" editor-type-id="images" />
+        <entry file="file://$PROJECT_DIR$/src/test/java/page/DetailsActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="311">
+              <caret line="82" column="65" selection-start-line="82" selection-start-column="65" selection-end-line="82" selection-end-column="65" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/report/AutomationTestReport.html">
-          <provider selected="true" editor-type-id="text-editor" />
+        <entry file="file://$PROJECT_DIR$/src/test/java/test/CreateMovieTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="20" column="41" lean-forward="true" selection-start-line="13" selection-start-column="12" selection-end-line="20" selection-end-column="41" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/test/TestBase.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="167">
+              <caret line="87" column="85" selection-start-line="87" selection-start-column="85" selection-end-line="87" selection-end-column="85" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/page/CreateMovieActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-134">
+              <caret line="11" column="47" selection-start-line="11" selection-start-column="47" selection-end-line="11" selection-end-column="47" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
         </entry>
       </file>
     </leaf>
@@ -142,6 +146,11 @@
       </list>
     </option>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>Back</find>
+    </findStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
@@ -151,16 +160,21 @@
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/test/java/ultis/AppiumServer.java" />
         <option value="$PROJECT_DIR$/src/test/java/page/PageBase.java" />
-        <option value="$PROJECT_DIR$/smoke.xml" />
         <option value="$PROJECT_DIR$/src/test/java/ultis/TestReport.java" />
         <option value="$PROJECT_DIR$/src/main/resources/config.properties" />
         <option value="$PROJECT_DIR$/src/test/java/test/TestBase.java" />
         <option value="$PROJECT_DIR$/src/test/java/ultis/Common.java" />
         <option value="$PROJECT_DIR$/src/test/java/page/SignUpActivity.java" />
-        <option value="$PROJECT_DIR$/src/test/java/page/UserProfileActivity.java" />
         <option value="$PROJECT_DIR$/src/test/java/page/SignInActivity.java" />
-        <option value="$PROJECT_DIR$/src/test/java/page/DanhsachphimActivity.java" />
         <option value="$PROJECT_DIR$/src/test/java/test/SignUpTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/page/CreateMovie.java" />
+        <option value="$PROJECT_DIR$/src/test/java/page/CreateMovieActivity.java" />
+        <option value="$PROJECT_DIR$/src/test/java/page/DanhsachphimActivity.java" />
+        <option value="$PROJECT_DIR$/src/test/java/page/UserProfileActivity.java" />
+        <option value="$PROJECT_DIR$/src/test/java/page/DetailsActivity.java" />
+        <option value="$PROJECT_DIR$/src/test/java/test/CreateMovieTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/test/ProfileUserTest.java" />
+        <option value="$PROJECT_DIR$/smoke.xml" />
       </list>
     </option>
   </component>
@@ -249,7 +263,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1548129157714" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1548141265421" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -304,34 +318,34 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="E__ProjectAndroid_Phim_Testcinema_smoke_xml - 2019.01.22 at 09h 56m 01s.xml">
+    <history-entry file="E__ProjectAndroid_Phim_Testcinema_smoke_xml - 2019.01.22 at 13h 37m 06s.xml">
       <configuration name="E:/ProjectAndroid/Phim/Testcinema/smoke.xml" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="E__ProjectAndroid_Phim_Testcinema_smoke_xml - 2019.01.22 at 10h 16m 44s.xml">
+    <history-entry file="E__ProjectAndroid_Phim_Testcinema_smoke_xml - 2019.01.22 at 13h 38m 35s.xml">
       <configuration name="E:/ProjectAndroid/Phim/Testcinema/smoke.xml" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="E__ProjectAndroid_Phim_Testcinema_smoke_xml - 2019.01.22 at 10h 20m 24s.xml">
+    <history-entry file="E__ProjectAndroid_Phim_Testcinema_smoke_xml - 2019.01.22 at 13h 48m 10s.xml">
       <configuration name="E:/ProjectAndroid/Phim/Testcinema/smoke.xml" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="E__ProjectAndroid_Phim_Testcinema_smoke_xml - 2019.01.22 at 10h 26m 12s.xml">
+    <history-entry file="E__ProjectAndroid_Phim_Testcinema_smoke_xml - 2019.01.22 at 13h 49m 46s.xml">
       <configuration name="E:/ProjectAndroid/Phim/Testcinema/smoke.xml" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="E__ProjectAndroid_Phim_Testcinema_smoke_xml - 2019.01.22 at 10h 28m 41s.xml">
+    <history-entry file="E__ProjectAndroid_Phim_Testcinema_smoke_xml - 2019.01.22 at 13h 54m 48s.xml">
       <configuration name="E:/ProjectAndroid/Phim/Testcinema/smoke.xml" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="E__ProjectAndroid_Phim_Testcinema_smoke_xml - 2019.01.22 at 10h 37m 08s.xml">
+    <history-entry file="E__ProjectAndroid_Phim_Testcinema_smoke_xml - 2019.01.22 at 14h 00m 13s.xml">
       <configuration name="E:/ProjectAndroid/Phim/Testcinema/smoke.xml" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="E__ProjectAndroid_Phim_Testcinema_smoke_xml - 2019.01.22 at 10h 40m 34s.xml">
+    <history-entry file="E__ProjectAndroid_Phim_Testcinema_smoke_xml - 2019.01.22 at 14h 02m 55s.xml">
       <configuration name="E:/ProjectAndroid/Phim/Testcinema/smoke.xml" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="E__ProjectAndroid_Phim_Testcinema_smoke_xml - 2019.01.22 at 10h 42m 51s.xml">
+    <history-entry file="E__ProjectAndroid_Phim_Testcinema_smoke_xml - 2019.01.22 at 14h 06m 13s.xml">
       <configuration name="E:/ProjectAndroid/Phim/Testcinema/smoke.xml" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="E__ProjectAndroid_Phim_Testcinema_smoke_xml - 2019.01.22 at 10h 43m 58s.xml">
+    <history-entry file="E__ProjectAndroid_Phim_Testcinema_smoke_xml - 2019.01.22 at 14h 08m 32s.xml">
       <configuration name="E:/ProjectAndroid/Phim/Testcinema/smoke.xml" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="E__ProjectAndroid_Phim_Testcinema_smoke_xml - 2019.01.22 at 10h 50m 11s.xml">
+    <history-entry file="E__ProjectAndroid_Phim_Testcinema_smoke_xml - 2019.01.22 at 14h 10m 45s.xml">
       <configuration name="E:/ProjectAndroid/Phim/Testcinema/smoke.xml" configurationId="TestNG" />
     </history-entry>
   </component>
@@ -339,7 +353,7 @@
     <frame x="260" y="20" width="1400" height="1000" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25373134" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25373134" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -348,8 +362,8 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3298731" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3298731" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3298731" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39907727" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -366,6 +380,24 @@
       <window_info anchor="right" id="Capture Analysis" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
     </layout>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/test/CreateMovieTest.java</url>
+          <line>29</line>
+          <properties />
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/test/CreateMovieTest.java</url>
+          <line>110</line>
+          <properties />
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/test/java/package-info.java" />
@@ -393,37 +425,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/test/TestBase.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="87" column="85" selection-start-line="87" selection-start-column="85" selection-end-line="87" selection-end-column="85" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="805">
-          <caret line="48" column="26" selection-start-line="48" selection-start-column="26" selection-end-line="48" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/smoke.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="35" selection-start-line="10" selection-start-column="35" selection-end-line="10" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/ultis/Common.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="265">
-          <caret line="48" column="85" selection-start-line="48" selection-start-column="18" selection-end-line="48" selection-end-column="85" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/report/22012019_093417.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -437,47 +438,78 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/page/SignUpActivity.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/seleniumhq/selenium/selenium-support/3.6.0/selenium-support-3.6.0.jar!/org/openqa/selenium/support/ui/ExpectedConditions.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="34" selection-start-line="34" selection-end-line="34" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="85">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/page/SignInActivity.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/ultis/Common.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="333">
-          <caret line="35" column="15" selection-start-line="35" selection-start-column="15" selection-end-line="35" selection-end-column="15" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="401">
+          <caret line="56" selection-start-line="56" selection-end-line="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="519">
+          <caret line="48" column="26" selection-start-line="48" selection-start-column="26" selection-end-line="48" selection-end-column="26" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/page/PageBase.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="36" selection-start-line="36" selection-end-line="36" />
+        <state relative-caret-position="-105">
+          <caret line="109" column="29" selection-start-line="109" selection-start-column="16" selection-end-line="109" selection-end-column="29" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/page/UserProfileActivity.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/page/SignInActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="82">
-          <caret line="20" column="37" selection-start-line="20" selection-start-column="19" selection-end-line="20" selection-end-column="37" />
+        <state relative-caret-position="265">
+          <caret line="32" selection-start-line="32" selection-end-line="32" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/test/SignUpTest.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/page/SignUpActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="167">
-          <caret line="26" selection-start-line="26" selection-end-line="26" />
+        <state relative-caret-position="-24">
+          <caret line="24" selection-start-line="22" selection-start-column="5" selection-end-line="24" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/page/DetailsActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="311">
+          <caret line="82" column="65" selection-start-line="82" selection-start-column="65" selection-end-line="82" selection-end-column="65" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/page/UserProfileActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="333">
+          <caret line="43" column="5" lean-forward="true" selection-start-line="43" selection-start-column="5" selection-end-line="43" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/page/CreateMovieActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-134">
+          <caret line="11" column="47" selection-start-line="11" selection-start-column="47" selection-end-line="11" selection-end-column="47" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -486,11 +518,58 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/page/DanhsachphimActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="333">
-          <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
+        <state relative-caret-position="295">
+          <caret line="54" column="26" selection-start-line="54" selection-start-column="26" selection-end-line="54" selection-end-column="26" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/test/TestBase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="167">
+          <caret line="87" column="85" selection-start-line="87" selection-start-column="85" selection-end-line="87" selection-end-column="85" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/test/CreateMovieTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="20" column="41" lean-forward="true" selection-start-line="13" selection-start-column="12" selection-end-line="20" selection-end-column="41" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/test/SignUpTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="34" column="13" lean-forward="true" selection-start-line="16" selection-start-column="12" selection-end-line="34" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/test/ProfileUserTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="30" column="9" selection-start-line="30" selection-start-column="9" selection-end-line="30" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/smoke.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="48" selection-start-line="12" selection-start-column="48" selection-end-line="12" selection-end-column="48" />
         </state>
       </provider>
     </entry>
