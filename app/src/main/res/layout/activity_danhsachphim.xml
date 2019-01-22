@@ -12,50 +12,63 @@
         android:id="@+id/tbdanhsachphim"
         android:background="?attr/colorPrimary">
     </android.support.v7.widget.Toolbar>
+    <Button
+        android:textColor="#fff"
+        android:id="@+id/btnuserprofile"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="User Profile"
+        android:layout_marginTop="60dp"
+        android:layout_marginLeft="20dp"
+        android:background="@drawable/button_background"/>
 
+    <Button
+        android:id="@+id/btntaophim"
+        android:textColor="#fff"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="Tạo Phim"
+        android:background="@drawable/button_background"
+        android:layout_marginLeft="260dp"
+        android:layout_marginTop="60dp"/>
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swip_refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="130dp"
         >
 
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
 
                  <android.support.v7.widget.RecyclerView
                      android:layout_width="match_parent"
                      android:layout_height="wrap_content"
                      android:id="@+id/recyclerview"
-                     android:layout_marginTop="80dp"
+                     android:layout_marginTop="120dp"
 
                      >
                  </android.support.v7.widget.RecyclerView>
-            </LinearLayout>
 
     </android.support.v4.widget.SwipeRefreshLayout>
-                    <android.support.design.widget.FloatingActionButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="200dp"
-                        android:id="@+id/fttaophim"
-                        android:src="@drawable/ic_plus"
-                        android:layout_gravity="bottom|end"
-                        android:layout_margin="16dp"
-                        android:backgroundTint="?attr/colorPrimary"
-                        android:tint="#FFF"/>
+                    <!--<android.support.design.widget.FloatingActionButton-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="200dp"-->
+                        <!--android:id="@+id/fttaophim"-->
+                        <!--android:src="@drawable/ic_plus"-->
+                        <!--android:layout_gravity="bottom|end"-->
+                        <!--android:layout_margin="16dp"-->
+                        <!--android:backgroundTint="?attr/colorPrimary"-->
+                        <!--android:tint="#FFF"/>-->
 
-        <android.support.design.widget.FloatingActionButton
-            android:layout_width="wrap_content"
-            android:layout_height="200dp"
-            android:id="@+id/ftuser"
-            android:src="@drawable/ic_user"
-            android:layout_gravity="bottom"
-            android:layout_margin="16dp"
-            android:backgroundTint="?attr/colorPrimary"
-            android:tint="#FFF"/>
+        <!--<android.support.design.widget.FloatingActionButton-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="200dp"-->
+            <!--android:id="@+id/ftuser"-->
+            <!--android:src="@drawable/ic_user"-->
+            <!--android:layout_gravity="bottom"-->
+            <!--android:layout_margin="16dp"-->
+            <!--android:backgroundTint="?attr/colorPrimary"-->
+            <!--android:tint="#FFF"/>-->
 
 
 

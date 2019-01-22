@@ -10,8 +10,8 @@
         <classes>
             <!--<class name="test.SignUpTest"/>-->
             <!--<class name="test.CreateMovieTest"/>-->
-            <class name="test.ProfileUserTest"/>
-
+            <!--<class name="test.ProfileUserTest"/>-->
+            <class name="test.SearchTest"/>
         </classes>
     </test>
 </suite>

@@ -20,6 +20,7 @@ public class CreateMovieActivity extends PageBase {
     }
 
     public void createmovie(String tenphim,String mota) throws Exception {
+        Thread.sleep(4000);
         WebElement inputName = wait.until(ExpectedConditions.elementToBeClickable(By.id("edtTenPhim")));
         inputName.sendKeys(tenphim);
 //
@@ -37,7 +38,7 @@ public class CreateMovieActivity extends PageBase {
         WebElement buttontaophim   = wait.until(ExpectedConditions.elementToBeClickable(By.id("btnTaoPhim")));
         buttontaophim.click();
 
-        Thread.sleep(4000);
+        Thread.sleep(2000);
         TestReport.testReport(appiumDriver,true,"Click Tạo phim",true);
 
     }

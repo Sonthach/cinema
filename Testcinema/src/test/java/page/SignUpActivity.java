@@ -47,6 +47,6 @@ public class SignUpActivity extends PageBase {
             e.printStackTrace();
         }
 
-        TestReport.testReport(appiumDriver,true,"Capture List Movie",true);
+        TestReport.testReport(appiumDriver,true,"Màn hình danh sách phim",true);
     }
 }

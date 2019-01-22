@@ -9,7 +9,7 @@ import static org.testng.Assert.assertEquals;
 public class CreateMovieTest extends TestBase {
 
     //@Test
-    public void taoPhimtest(){
+    public void TaoPhimTest(){
         try {
             SignInActivity signInActivity = new SignInActivity(androidDriver);
             signInActivity.clickDangky();
@@ -79,7 +79,7 @@ public class CreateMovieTest extends TestBase {
             }
 
             detailsActivity.clickEditMovie();
-
+            String edit = "Edit_"+Common.generateUniqueString();
             detailsActivity.editNameMovie(tenphim);
 
             result = detailsActivity.checkNameAfterEdit(tenphim);

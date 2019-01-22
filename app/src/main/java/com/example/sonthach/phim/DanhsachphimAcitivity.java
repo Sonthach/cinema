@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.widget.Button;
 
 import com.example.sonthach.phim.Load.Filmss;
 import com.example.sonthach.phim.Load.Movie;
@@ -45,6 +46,7 @@ public class DanhsachphimAcitivity extends AppCompatActivity implements SwipeRef
     private String TAG = MainActivity.class.getSimpleName();
     private APIService apiService;
     private SwipeRefreshLayout swipeRefreshLayout;
+    Button userprofile,createmovie;
 
     // 2 arraylist, 1 cai chinh de chua du lieu tra ve, cai con lai chua du lieu sau khi tim xong dung de hien thi
     @Override
@@ -56,14 +58,14 @@ public class DanhsachphimAcitivity extends AppCompatActivity implements SwipeRef
         Anhxa();
         onloadingSwipRefresh("");
 
-        fab.setOnClickListener(new View.OnClickListener() {
+        createmovie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(DanhsachphimAcitivity.this,TaoPhimActivity.class));
             }
         });
 
-        ftuser.setOnClickListener(new View.OnClickListener() {
+        userprofile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(DanhsachphimAcitivity.this,ProfileUserActivity.class));
@@ -79,8 +81,11 @@ public class DanhsachphimAcitivity extends AppCompatActivity implements SwipeRef
         swipeRefreshLayout = findViewById(R.id.swip_refresh);
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
-        ftuser = findViewById(R.id.ftuser);
-        fab = findViewById(R.id.fttaophim);
+//        ftuser = findViewById(R.id.ftuser);
+//        fab = findViewById(R.id.fttaophim);
+        userprofile = findViewById(R.id.btnuserprofile);
+        createmovie = findViewById(R.id.btntaophim);
+
         recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
         LinearLayoutManager layoutManager = new LinearLayoutManager(DanhsachphimAcitivity.this);
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);

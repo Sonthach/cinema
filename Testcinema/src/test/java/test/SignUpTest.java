@@ -12,7 +12,7 @@ import static org.testng.Assert.assertEquals;
 
 public class SignUpTest extends TestBase {
     @Test
-    public void dangky(){
+    public void DangKyTest(){
         try {
             SignInActivity signInActivity = new SignInActivity(androidDriver);
             signInActivity.clickDangky();

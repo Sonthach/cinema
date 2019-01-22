@@ -22,7 +22,7 @@ public class TestListener implements ITestListener {
         if (TestReport.extentTest == null) {
             String workingDir = System.getProperty("user.dir");
             System.out.println("workingDir" + workingDir);
-            extentReports = new ExtentReports(workingDir + "/report/AutomationTestReport.html", true, NetworkMode.OFFLINE);
+            extentReports = new ExtentReports(workingDir + "/report/SignInReport.html", true, NetworkMode.OFFLINE);
             //reports = new ExtentReports(new SimpleDateFormat("dd-MM-yyyy_hh-mm-ss-ms_").format(new Date()) + "reports.html");
             //iTestContext.setAttribute("WebDriver", this.driver);
         }
